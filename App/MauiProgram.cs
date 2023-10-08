@@ -6,6 +6,8 @@ namespace App
     {
         public static MauiApp CreateMauiApp()
         {
+            // this is a test comment
+            // uhuuu!
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
