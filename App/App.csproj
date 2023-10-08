@@ -10,10 +10,10 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 
 		<!-- Display name -->
-		<ApplicationTitle>App</ApplicationTitle>
+		<ApplicationTitle>Studennyk</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.app</ApplicationId>
+		<ApplicationId>com.nemesnyky.studennyk</ApplicationId>
 		<ApplicationIdGuid>1b8d175d-ebb7-4ee9-90ec-db541628f2f3</ApplicationIdGuid>
 
 		<!-- Versions -->
