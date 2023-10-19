@@ -3,11 +3,11 @@ public class Task
     public int Id { get; set; }
     public string Title { get; set; }
     public string Description { get; set; }
-    public DateTime Created { get; set; }
-    public DateTime Due { get; set; }
+    public DateTimeOffset Created { get; set; }
+    public DateTimeOffset Due { get; set; }
     public bool IsDone { get; set; }
 
-    public Task(int id, string title, string description, DateTime created, DateTime due, bool isDone)
+    public Task(int id, string title, string description, DateTimeOffset created, DateTimeOffset due, bool isDone)
     {
         Id = id;
         Title = title;

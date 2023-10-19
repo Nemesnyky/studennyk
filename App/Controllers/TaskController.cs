@@ -27,8 +27,8 @@ public class TaskController
 
         string description = lorem.Substring(random.Next(0, 200), random.Next(51, lorem.Length - 201));
 
-        DateTime created = DateTime.Now.AddDays(random.Next(1, 3)).AddHours(random.Next(1, 12));
-        DateTime due = created.AddDays(random.Next(1, 7));
+        DateTimeOffset created = DateTimeOffset.Now.AddDays(random.Next(1, 3)).AddHours(random.Next(1, 12));
+        DateTimeOffset due = created.AddDays(random.Next(1, 7));
 
         return new Task(id, title, description, created, due, false);
     }
