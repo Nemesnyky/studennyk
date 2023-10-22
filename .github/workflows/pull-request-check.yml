@@ -1,0 +1,21 @@
+name: Check PR Source Branch
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  check_pr_source_branch:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check Source Branch
+      id: check_branch
+      run: |
+        if [[ ${{ github.event.pull_request.base.ref }} == "main" && ${{ github.event.pull_request.head.ref }} != "dev" ]]; then
+          echo "ERROR: Pull request to main branch is not from dev branch."
+          exit 1
+        else
+          echo "Pull request source branch is valid."
+        fi
