@@ -1,4 +1,4 @@
-﻿namespace App
+﻿namespace App.Views
 {
     public partial class MainPage : ContentPage
     {
