@@ -35,6 +35,12 @@ public class TaskListViewModel : INotifyPropertyChanged
         }
     }
 
+    public async void DeleteTask(int taskId)
+    {
+        Tasks.Remove(tasks.Single(t => t.Id == taskId));
+        await System.Threading.Tasks.Task.Run(() => taskController.DeleteTask(taskId));
+    }
+
     protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

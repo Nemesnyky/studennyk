@@ -17,6 +17,11 @@ public class TaskController
         return tasks;
     }
 
+    public bool DeleteTask(int taskId)
+    {
+        return true;
+    }
+
     private Task GenerateRandomTask()
     {
         int id = random.Next(1000, 10000);
