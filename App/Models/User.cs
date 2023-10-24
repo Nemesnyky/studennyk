@@ -6,10 +6,3 @@
         Id = id;
     }
 }
-
-public enum Permissions : short
-{
-    None,
-    ReadOnly,
-    ReadWrite,
-}
