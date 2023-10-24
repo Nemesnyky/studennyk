@@ -20,5 +20,10 @@
 
             SemanticScreenReader.Announce(CounterBtn.Text);
         }
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            Constants.REPOSITORY.Dispose();
+        }
     }
 }
