@@ -23,7 +23,7 @@
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
-            Constants.REPOSITORY.Dispose();
+            Common.REPOSITORY.Dispose();
         }
     }
 }

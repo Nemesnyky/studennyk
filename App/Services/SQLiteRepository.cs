@@ -12,20 +12,21 @@ namespace App.Services
             connection.Open();
             command = connection.CreateCommand();
             CreateUsersTable();
-            AddUser(Constants.DEFAULT_USER);
+            AddUser(Common.DEFAULT_USER);
         }
 
         #region Task CRUD
-        public void AddTask(User user, Task newTask)
+        public int AddTask(User user, Task newTask)
         {
             ExecuteSQLiteCommand(
-                $"INSERT INTO tasks_{user.Id} (task_id, title, description, created, due, is_done) VALUES (" +
-                $"{newTask.Id}, " +
+                $"INSERT INTO tasks_{user.Id} (title, description, created, due, is_done) VALUES (" +
                 $"'{newTask.Title}', " +
                 $"'{newTask.Description}', " +
                 $"'{newTask.Created}', " +
                 $"'{newTask.Due}', " +
                 $"{newTask.IsDone});");
+            command.CommandText = "SELECT last_insert_rowid()";
+            return (int)(long)command.ExecuteScalar();
         }
         public void DeleteTask(User user, int task_id)
         {
@@ -97,7 +98,7 @@ namespace App.Services
             if (TableExists($"tasks_{user.Id}")) return;
             ExecuteSQLiteCommand(
                 $"CREATE TABLE tasks_{user.Id} (" +
-                "task_id INT NOT NULL PRIMARY KEY UNIQUE, " +
+                "task_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
                 "title TEXT NOT NULL, " +
                 "description TEXT NOT NULL, " +
                 "created TEXT NOT NULL, " +
