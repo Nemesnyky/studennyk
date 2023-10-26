@@ -13,6 +13,7 @@ namespace AppTests.Services
             _repository = new SQLiteRepository("Data Source=:memory:");
             _user = Common.DEFAULT_USER;
             _task = Common.GenerateRandomTask();
+            _task.Id = _repository.AddTask(_user, _task);
         }
 
         public void Dispose()
@@ -26,8 +27,7 @@ namespace AppTests.Services
         {
             Task expected = _task;
 
-            expected.Id = _repository.AddTask(_user, _task);
-            Task actual = _repository.GetTask(_user, expected.Id);
+            Task actual = _repository.GetTask(_user, _task.Id);
 
             Assert.Equal(expected, actual);
         }
@@ -37,9 +37,8 @@ namespace AppTests.Services
         {
             Task? expected = null;
 
-            int _task_id = _repository.AddTask(_user, _task);
-            _repository.DeleteTask(_user, _task_id);
-            Task actual = _repository.GetTask(_user, _task_id);
+            _repository.DeleteTask(_user, _task.Id);
+            Task actual = _repository.GetTask(_user, _task.Id);
 
             Assert.Equal(expected, actual);
         }
@@ -49,9 +48,8 @@ namespace AppTests.Services
         {
             string expected = "newTitle";
 
-            int _task_id = _repository.AddTask(_user, _task);
-            _repository.UpdateTaskTitle(_user, _task_id, "newTitle");
-            string actual = _repository.GetTask(_user, _task_id).Title;
+            _repository.UpdateTaskTitle(_user, _task.Id, "newTitle");
+            string actual = _repository.GetTask(_user, _task.Id).Title;
 
             Assert.Equal(expected, actual);
         }
@@ -61,9 +59,8 @@ namespace AppTests.Services
         {
             string expected = "newDescription";
 
-            int _task_id = _repository.AddTask(_user, _task);
-            _repository.UpdateTaskDescription(_user, _task_id, "newDescription");
-            string actual = _repository.GetTask(_user, _task_id).Description;
+            _repository.UpdateTaskDescription(_user, _task.Id, "newDescription");
+            string actual = _repository.GetTask(_user, _task.Id).Description;
 
             Assert.Equal(expected, actual);
         }
@@ -73,9 +70,8 @@ namespace AppTests.Services
         {
             DateTimeOffset expected = DateTimeOffset.Now;
 
-            int _task_id = _repository.AddTask(_user, _task);
-            _repository.UpdateTaskDueTime(_user, _task_id, expected);
-            DateTimeOffset actual = _repository.GetTask(_user, _task_id).Due;
+            _repository.UpdateTaskDueTime(_user, _task.Id, expected);
+            DateTimeOffset actual = _repository.GetTask(_user, _task.Id).Due;
 
             Assert.Equal(expected.ToString(), actual.ToString());
         }
@@ -83,9 +79,8 @@ namespace AppTests.Services
         [Fact]
         public void GetTasksTest()
         {
-            List<Task> expected = new List<Task> { Common.GenerateRandomTask(), Common.GenerateRandomTask(), Common.GenerateRandomTask() };
+            List<Task> expected = new List<Task> { _task, Common.GenerateRandomTask(), Common.GenerateRandomTask() };
 
-            expected[0].Id = _repository.AddTask(_user, expected[0]);
             expected[1].Id = _repository.AddTask(_user, expected[1]);
             expected[2].Id = _repository.AddTask(_user, expected[2]);
             List<Task> actual = (List<Task>)_repository.GetTasks(_user);

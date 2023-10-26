@@ -5,7 +5,7 @@ namespace App.Services
     public class SQLiteRepository : IRepository, IDisposable
     {
         private readonly SqliteConnection connection;
-        private SqliteCommand command;
+        private readonly SqliteCommand command;
         public SQLiteRepository(string connectionString)
         {
             connection = new SqliteConnection(connectionString);
