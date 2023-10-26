@@ -2,7 +2,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-public class TaskListViewModel : INotifyPropertyChanged
+public class AgendaViewModel : INotifyPropertyChanged
 {
     private TaskController taskController = new TaskController();
     private ObservableCollection<Task> tasks;
@@ -19,12 +19,12 @@ public class TaskListViewModel : INotifyPropertyChanged
 
     public event PropertyChangedEventHandler PropertyChanged;
 
-    public TaskListViewModel()
+    public AgendaViewModel()
     {
         Tasks = new ObservableCollection<Task>();
     }
 
-    public async void LoadTasks(int userId)
+    public async System.Threading.Tasks.Task LoadTasks(int userId)
     {
         var taskList = await System.Threading.Tasks.Task.Run(() => taskController.GetTaskList(userId));
 
