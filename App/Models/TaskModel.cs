@@ -20,4 +20,13 @@ public class TaskModel
         IsDone = isDone;
     }
 }
+    public class TaskGroup : List<TaskModel>
+    {
+        public DateTimeOffset Date { get; private set; }
+
+        public TaskGroup(DateTimeOffset date, IEnumerable<TaskModel> tasks) : base(tasks)
+        {
+            Date = date;
+        }
+    }
 }
