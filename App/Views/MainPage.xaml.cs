@@ -1,4 +1,6 @@
-﻿namespace App.Views
+﻿using App.Services;
+
+namespace App.Views
 {
     public partial class MainPage : ContentPage
     {
@@ -19,11 +21,6 @@
                 CounterBtn.Text = $"Clicked {count} times";
 
             SemanticScreenReader.Announce(CounterBtn.Text);
-        }
-        protected override void OnDisappearing()
-        {
-            base.OnDisappearing();
-            Common.REPOSITORY.Dispose();
         }
     }
 }

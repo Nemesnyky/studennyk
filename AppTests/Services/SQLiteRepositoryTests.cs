@@ -4,30 +4,43 @@ namespace AppTests.Services
 {
     public class SQLiteRepositoryTests : IDisposable
     {
-        private readonly SQLiteRepository _repository;
-        private readonly User _user;
-        private readonly Task _task;
+        private readonly SQLiteRepository repository;
+        private readonly Task task;
 
         public SQLiteRepositoryTests()
         {
-            _repository = new SQLiteRepository("Data Source=:memory:");
-            _user = Common.DEFAULT_USER;
-            _task = Common.GenerateRandomTask();
-            _task.Id = _repository.AddTask(_user, _task);
+            repository = new SQLiteRepository("Data Source=:memory:");
+            task = GenerateRandomTask();
+            task.Id = repository.AddTask(task);
+        }
+
+        public static Task GenerateRandomTask()
+        {
+            Random random = new Random();
+            string[] titles = { "Buy groceries", "Finish project", "Call mom", "Exercise", "Read a book", "Clean the house" };
+            string lorem = "qwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnmqazwsxedcrfvtgbyhnujmikolp";
+            return new Task(
+                0,
+                titles[random.Next(titles.Length)],
+                lorem.Substring(random.Next(0, lorem.Length / 2), random.Next(1, lorem.Length / 2)),
+                DateTimeOffset.Now.AddDays(random.Next(1000)),
+                DateTimeOffset.Now.AddDays(random.Next(1000)),
+                random.Next(2) == 1
+                );
         }
 
         public void Dispose()
         {
-            _repository.Dispose();
+            repository.Dispose();
             GC.SuppressFinalize(this);
         }
 
         [Fact]
         public void AddTaskTest()
         {
-            Task expected = _task;
+            Task expected = task;
 
-            Task actual = _repository.GetTask(_user, _task.Id);
+            Task actual = repository.GetTask(task.Id);
 
             Assert.Equal(expected, actual);
         }
@@ -37,8 +50,8 @@ namespace AppTests.Services
         {
             Task? expected = null;
 
-            _repository.DeleteTask(_user, _task.Id);
-            Task actual = _repository.GetTask(_user, _task.Id);
+            repository.DeleteTask(task.Id);
+            Task actual = repository.GetTask(task.Id);
 
             Assert.Equal(expected, actual);
         }
@@ -48,8 +61,8 @@ namespace AppTests.Services
         {
             string expected = "newTitle";
 
-            _repository.UpdateTaskTitle(_user, _task.Id, "newTitle");
-            string actual = _repository.GetTask(_user, _task.Id).Title;
+            repository.UpdateTaskTitle(task.Id, "newTitle");
+            string actual = repository.GetTask(task.Id).Title;
 
             Assert.Equal(expected, actual);
         }
@@ -59,8 +72,8 @@ namespace AppTests.Services
         {
             string expected = "newDescription";
 
-            _repository.UpdateTaskDescription(_user, _task.Id, "newDescription");
-            string actual = _repository.GetTask(_user, _task.Id).Description;
+            repository.UpdateTaskDescription(task.Id, "newDescription");
+            string actual = repository.GetTask(task.Id).Description;
 
             Assert.Equal(expected, actual);
         }
@@ -70,8 +83,8 @@ namespace AppTests.Services
         {
             DateTimeOffset expected = DateTimeOffset.Now;
 
-            _repository.UpdateTaskDueTime(_user, _task.Id, expected);
-            DateTimeOffset actual = _repository.GetTask(_user, _task.Id).Due;
+            repository.UpdateTaskDueTime(task.Id, expected);
+            DateTimeOffset actual = repository.GetTask(task.Id).Due;
 
             Assert.Equal(expected.ToString(), actual.ToString());
         }
@@ -79,11 +92,11 @@ namespace AppTests.Services
         [Fact]
         public void GetTasksTest()
         {
-            List<Task> expected = new List<Task> { _task, Common.GenerateRandomTask(), Common.GenerateRandomTask() };
+            List<Task> expected = new List<Task> { task, GenerateRandomTask(), GenerateRandomTask() };
 
-            expected[1].Id = _repository.AddTask(_user, expected[1]);
-            expected[2].Id = _repository.AddTask(_user, expected[2]);
-            List<Task> actual = (List<Task>)_repository.GetTasks(_user);
+            expected[1].Id = repository.AddTask(expected[1]);
+            expected[2].Id = repository.AddTask(expected[2]);
+            IEnumerable<Task> actual = repository.GetTasks();
 
             Assert.True(expected.SequenceEqual(actual));
         }
