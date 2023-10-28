@@ -50,26 +50,6 @@ namespace App.ViewModels
             await Task.Run(() => taskController.DeleteTask(taskId));
         }
 
-        private void RegroupTasks()
-        {
-            TaskGroups.Clear();
-            var dates = new List<DateTimeOffset>();
-            var notCompleteTasks = tasks.Where(t => t.IsDone != true).ToList();
-            foreach (var task in notCompleteTasks)
-            {
-                tasks.Add(task);
-                if (dates.All(t => t.Hour != task.Due.Hour))
-                {
-                    dates.Add(task.Due);
-                }
-            }
-
-            foreach (var date in dates.OrderBy(t => t.Hour))
-            {
-                TaskGroups.Add(new TaskGroup(date,
-                    tasks.Where(t => t.Due.Hour == date.Hour && t.IsDone != true)));
-            }
-        }
 
         private void CompleteTask(int taskId)
         {
@@ -78,13 +58,8 @@ namespace App.ViewModels
 
             var taskGroup = TaskGroups.First(t => t.Date.Hour == task.Due.Hour);
 
-            if (taskGroup.Count(t => t.Id != task.Id) != 0) {
-                var tasks = taskGroup.Where(t => t.Id != task.Id).ToList();
-                taskGroup.Clear();
-                foreach (var taskModel in tasks)
-                {
-                    taskGroup.Add(taskModel);
-                }
+            if (taskGroup.Any(t => t.Id != task.Id)) {
+                taskGroup.Remove(task);
             } 
             else
             {
