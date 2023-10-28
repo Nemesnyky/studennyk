@@ -1,16 +1,18 @@
+using App.Models;
+
 public class TaskController
 {
     private Random random = new Random();
 
-    public List<Task> GetTaskList(int userId = 0)
+    public List<TaskModel> GetTaskList(int userId = 0)
     {
-        List<Task> tasks = new List<Task>();
+        List<TaskModel> tasks = new List<TaskModel>();
 
         int numTasks = random.Next(1, 11);
 
         for (int i = 0; i < numTasks; i++)
         {
-            Task task = GenerateRandomTask();
+            TaskModel task = GenerateRandomTask();
             tasks.Add(task);
         }
 
@@ -22,7 +24,7 @@ public class TaskController
         return true;
     }
 
-    private Task GenerateRandomTask()
+    private TaskModel GenerateRandomTask()
     {
         int id = random.Next(1000, 10000);
         string[] titles = { "Buy groceries", "Finish project", "Call mom", "Exercise", "Read a book", "Clean the house" };
@@ -35,7 +37,12 @@ public class TaskController
         DateTimeOffset created = DateTimeOffset.Now.AddDays(random.Next(1, 3)).AddHours(random.Next(1, 12));
         DateTimeOffset due = created.AddDays(random.Next(1, 7));
 
-        return new Task(id, title, description, created, due, false);
+        return new TaskModel(id, title, description, created, due, false);
+    }
+
+    public async Task CompleteTask(int taskId)
+    {
+        await Task.Delay(10);
     }
 }
 

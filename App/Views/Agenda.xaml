@@ -3,17 +3,40 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:views="clr-namespace:App.Views"
+             xmlns:models="clr-namespace:App.Models"
+             xmlns:viewModels="clr-namespace:App.ViewModels"
+             x:DataType="viewModels:AgendaViewModel"
              x:Class="App.Views.Agenda">
     <Grid Padding="20,20,20,20">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="8*"/>
-            <RowDefinition Height="2*"/>
+            <RowDefinition Height="8*" />
+            <RowDefinition Height="2*" />
         </Grid.RowDefinitions>
-        
-        <VerticalStackLayout x:Name="TaskList" Spacing="20"></VerticalStackLayout>
-        <Button Grid.Row="1" Text="Done"/>
+
+        <CollectionView ItemsSource="{Binding Tasks}">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="20" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:TaskModel">
+                    <Frame Padding="0">
+                        <Label HeightRequest="50" VerticalTextAlignment="Center" Padding="10,0,0,0" Text="{Binding Title}"></Label>
+                        <Frame.GestureRecognizers>
+                            <DragGestureRecognizer DragStartingCommand="{Binding Source={x:RelativeSource AncestorType={x:Type viewModels:AgendaViewModel}}, Path=DragStartedCommand}"
+                                                   DragStartingCommandParameter="{Binding .}"/>
+                        </Frame.GestureRecognizers>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <Frame Grid.Row="1" Padding="0" BackgroundColor="PaleGreen" BorderColor="Transparent">
+            <Frame.GestureRecognizers>
+                <DropGestureRecognizer DropCommand="{Binding TaskDroppedCommand}"/>
+            </Frame.GestureRecognizers>
+            <Label Text="Done" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+        </Frame>
     </Grid>
 </ContentView>
