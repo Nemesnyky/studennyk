@@ -54,7 +54,8 @@ namespace App.ViewModels
         {
             TaskGroups.Clear();
             var dates = new List<DateTimeOffset>();
-            foreach (var task in tasks.Where(t => t.IsDone != true))
+            var notCompleteTasks = tasks.Where(t => t.IsDone != true).ToList();
+            foreach (var task in notCompleteTasks)
             {
                 tasks.Add(task);
                 if (dates.All(t => t.Hour != task.Due.Hour))
@@ -72,11 +73,23 @@ namespace App.ViewModels
 
         private void CompleteTask(int taskId)
         {
-            Console.WriteLine(taskId);
             var task = tasks.First(t => t.Id == taskId);
             task.IsDone = true;
 
-            RegroupTasks();
+            var taskGroup = TaskGroups.First(t => t.Date.Hour == task.Due.Hour);
+
+            if (taskGroup.Count(t => t.Id != task.Id) != 0) {
+                var tasks = taskGroup.Where(t => t.Id != task.Id).ToList();
+                taskGroup.Clear();
+                foreach (var taskModel in tasks)
+                {
+                    taskGroup.Add(taskModel);
+                }
+            } 
+            else
+            {
+                TaskGroups.Remove(taskGroup);
+            }
 
             Task.Run(() => taskController.CompleteTask(taskId));
         }

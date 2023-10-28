@@ -1,3 +1,5 @@
+using System.Collections.ObjectModel;
+
 namespace App.Models
 {
     
@@ -20,7 +22,7 @@ public class TaskModel
         IsDone = isDone;
     }
 }
-    public class TaskGroup : List<TaskModel>
+    public class TaskGroup : ObservableCollection<TaskModel>
     {
         public DateTimeOffset Date { get; private set; }
 
