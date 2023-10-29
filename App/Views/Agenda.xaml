@@ -23,7 +23,7 @@
             <CollectionView.GroupHeaderTemplate>
                 <DataTemplate x:DataType="models:TaskGroup">
                     <Frame Padding="0" BorderColor="Transparent">
-                        <Label VerticalTextAlignment="Center" WidthRequest="100" FontSize="16" HeightRequest="50" Padding="0"
+                        <Label FontFamily="LibreFranklinSemiBold" VerticalTextAlignment="Center" WidthRequest="100" FontSize="16" HeightRequest="50" Padding="0"
                                Text="{Binding Date, StringFormat='{0:HH}:00'}">
                         </Label>
                     </Frame>
