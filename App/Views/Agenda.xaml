@@ -44,11 +44,13 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-        <Frame Grid.Row="1" Padding="0" BackgroundColor="PaleGreen" BorderColor="Transparent">
-            <Frame.GestureRecognizers>
+        <Grid Grid.Row="1" Padding="0" BackgroundColor="Transparent">
+            <Image Source="image_done.png" Aspect="AspectFit" />
+            <Label Text="Done" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
+            <Grid.GestureRecognizers>
                 <DropGestureRecognizer DropCommand="{Binding TaskDroppedCommand}" />
-            </Frame.GestureRecognizers>
-            <Label Text="Done" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-        </Frame>
+            </Grid.GestureRecognizers>
+        </Grid>
+
     </Grid>
 </ContentView>

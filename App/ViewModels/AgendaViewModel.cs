@@ -1,7 +1,7 @@
 using System.Collections.ObjectModel;
 using App.Models;
 using CommunityToolkit.Mvvm.Input;
-
+ 
 namespace App.ViewModels
 {
     public partial class AgendaViewModel
