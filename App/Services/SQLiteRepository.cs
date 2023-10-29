@@ -9,9 +9,9 @@ namespace App.Services
 
         ///<summary>
         ///<para>If you need to open/create a database, use the following argument: "Data Source=name.db";</para>
-        ///<para>If you need a temporary database, use the following argument: "Data Source=:memory:";</para>
+        ///<para>If you need a temporary database, don't use any arguments;</para>
         ///</summary>
-        public SQLiteRepository(string connectionString)
+        public SQLiteRepository(string connectionString = "Data Source=:memory:")
         {
             connection = new SqliteConnection(connectionString);
             connection.Open();
@@ -25,6 +25,7 @@ namespace App.Services
             command.CommandText = $"SELECT name FROM sqlite_master WHERE type = 'table' AND name = '{tableName}';";
             return command.ExecuteScalar() != null;
         }
+
         private void CreateTasksTable()
         {
             ExecuteSQLiteQuery(
@@ -38,7 +39,7 @@ namespace App.Services
         }
 
         #region Task CRUD
-        public int AddTask(Task newTask)
+        public long? AddTask(Task newTask)
         {
             ExecuteSQLiteQuery(
                 $"INSERT INTO tasks (title, description, created, due, is_done) VALUES (" +
@@ -52,27 +53,27 @@ namespace App.Services
             return GetIdOfLastAddedTask();
         }
 
-        public void DeleteTask(int task_id)
+        public void DeleteTask(long? task_id)
         {
             ExecuteSQLiteQuery($"DELETE FROM tasks WHERE task_id = {task_id};");
         }
 
-        public void UpdateTaskTitle(int task_id, string newTitle)
+        public void UpdateTaskTitle(long? task_id, string newTitle)
         {
             ExecuteSQLiteQuery($"UPDATE tasks SET title = '{newTitle}' WHERE task_id = {task_id};");
         }
 
-        public void UpdateTaskDescription(int task_id, string newDescription)
+        public void UpdateTaskDescription(long? task_id, string newDescription)
         {
             ExecuteSQLiteQuery($"UPDATE tasks SET description = '{newDescription}' WHERE task_id = {task_id};");
         }
 
-        public void UpdateTaskDueTime(int task_id, DateTimeOffset newDue)
+        public void UpdateTaskDueTime(long? task_id, DateTimeOffset newDue)
         {
             ExecuteSQLiteQuery($"UPDATE tasks SET due = '{newDue:o}' WHERE task_id = {task_id};");
         }
 
-        public Task GetTask(int task_id)
+        public Task GetTask(long? task_id)
         {
             IEnumerable<Task> tasks = GetTasksFromReader($"WHERE  task_id = {task_id}");
 
@@ -91,10 +92,10 @@ namespace App.Services
             command.ExecuteNonQuery();
         }
 
-        private int GetIdOfLastAddedTask()
+        private long? GetIdOfLastAddedTask()
         {
             command.CommandText = "SELECT last_insert_rowid()";
-            return (int)(long)command.ExecuteScalar();
+            return (long?)command.ExecuteScalar();
         }
 
         private IEnumerable<Task> GetTasksFromReader(string where = "")
@@ -108,8 +109,8 @@ namespace App.Services
                     reader.GetInt32(0),
                     reader.GetString(1),
                     reader.GetString(2),
-                    DateTimeOffset.Parse(reader.GetString(3)),
-                    DateTimeOffset.Parse(reader.GetString(4)),
+                    reader.GetDateTimeOffset(3),
+                    reader.GetDateTimeOffset(4),
                     reader.GetBoolean(5))
                     );
 

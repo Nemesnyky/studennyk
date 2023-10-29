@@ -92,7 +92,7 @@ namespace AppTests.Services
         [Fact]
         public void GetTasksTest()
         {
-            List<Task> expected = new List<Task> { task, GenerateRandomTask(), GenerateRandomTask() };
+            var expected = new List<Task> { task, GenerateRandomTask(), GenerateRandomTask() };
 
             expected[1].Id = repository.AddTask(expected[1]);
             expected[2].Id = repository.AddTask(expected[2]);

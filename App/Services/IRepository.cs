@@ -2,12 +2,12 @@
 {
     interface IRepository
     {
-        int AddTask(Task newTask);
-        void DeleteTask(int task_id);
-        void UpdateTaskTitle(int task_id, string newTitle);
-        void UpdateTaskDescription(int task_id, string newDescription);
-        void UpdateTaskDueTime(int task_id, DateTimeOffset newDue);
-        Task GetTask(int task_id);
+        long? AddTask(Task newTask);
+        void DeleteTask(long? task_id);
+        void UpdateTaskTitle(long? task_id, string newTitle);
+        void UpdateTaskDescription(long? task_id, string newDescription);
+        void UpdateTaskDueTime(long? task_id, DateTimeOffset newDue);
+        Task GetTask(long? task_id);
         IEnumerable<Task> GetTasks();
     }
 }
