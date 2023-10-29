@@ -81,5 +81,8 @@ namespace App.ViewModels
             CompleteTask(dragged.Id);
             dragged = null;
         }
+        
+
+       
     }
 }
