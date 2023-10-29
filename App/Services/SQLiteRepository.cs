@@ -39,7 +39,7 @@ namespace App.Services
         }
 
         #region Task CRUD
-        public long? AddTask(Task newTask)
+        public long AddTask(Task newTask)
         {
             ExecuteSQLiteQuery(
                 $"INSERT INTO tasks (title, description, created, due, is_done) VALUES (" +
@@ -53,27 +53,27 @@ namespace App.Services
             return GetIdOfLastAddedTask();
         }
 
-        public void DeleteTask(long? task_id)
+        public void DeleteTask(long task_id)
         {
             ExecuteSQLiteQuery($"DELETE FROM tasks WHERE task_id = {task_id};");
         }
 
-        public void UpdateTaskTitle(long? task_id, string newTitle)
+        public void UpdateTaskTitle(long task_id, string newTitle)
         {
             ExecuteSQLiteQuery($"UPDATE tasks SET title = '{newTitle}' WHERE task_id = {task_id};");
         }
 
-        public void UpdateTaskDescription(long? task_id, string newDescription)
+        public void UpdateTaskDescription(long task_id, string newDescription)
         {
             ExecuteSQLiteQuery($"UPDATE tasks SET description = '{newDescription}' WHERE task_id = {task_id};");
         }
 
-        public void UpdateTaskDueTime(long? task_id, DateTimeOffset newDue)
+        public void UpdateTaskDueTime(long task_id, DateTimeOffset newDue)
         {
             ExecuteSQLiteQuery($"UPDATE tasks SET due = '{newDue:o}' WHERE task_id = {task_id};");
         }
 
-        public Task GetTask(long? task_id)
+        public Task GetTask(long task_id)
         {
             IEnumerable<Task> tasks = GetTasksFromReader($"WHERE  task_id = {task_id}");
 
@@ -92,10 +92,10 @@ namespace App.Services
             command.ExecuteNonQuery();
         }
 
-        private long? GetIdOfLastAddedTask()
+        private long GetIdOfLastAddedTask()
         {
             command.CommandText = "SELECT last_insert_rowid()";
-            return (long?)command.ExecuteScalar();
+            return (long)command.ExecuteScalar();
         }
 
         private IEnumerable<Task> GetTasksFromReader(string where = "")
