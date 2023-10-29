@@ -1,4 +1,6 @@
-﻿namespace App.Views
+﻿using App.Services;
+
+namespace App.Views
 {
     public partial class MainPage : ContentPage
     {
