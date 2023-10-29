@@ -16,20 +16,20 @@ public class Task
         Due = due;
         IsDone = isDone;
     }
-    
+
     public override bool Equals(object obj)
     {
         return obj is Task task &&
-            Id == task.Id &&
-            Title == task.Title &&
-            Description == task.Description &&
-            Created.ToString() == task.Created.ToString() &&
-            Due.ToString() == task.Due.ToString() &&
-            IsDone == task.IsDone;
+               Id == task.Id &&
+               Title == task.Title &&
+               Description == task.Description &&
+               Created.Equals(task.Created) &&
+               Due.Equals(task.Due) &&
+               IsDone == task.IsDone;
     }
 
     public override int GetHashCode()
     {
-        throw new NotImplementedException();
+        return HashCode.Combine(Id, Title, Description, Created, Due, IsDone);
     }
 }

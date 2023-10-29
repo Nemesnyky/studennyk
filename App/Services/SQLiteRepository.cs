@@ -1,5 +1,4 @@
 ﻿using Microsoft.Data.Sqlite;
-using System.Threading.Tasks;
 
 namespace App.Services
 {
@@ -9,7 +8,8 @@ namespace App.Services
         private readonly SqliteCommand command;
 
         ///<summary>
-        ///If you need a temporary database, use the following argument: "Data Source=:memory:"
+        ///<para>If you need to open/create a database, use the following argument: "Data Source=name.db";</para>
+        ///<para>If you need a temporary database, use the following argument: "Data Source=:memory:";</para>
         ///</summary>
         public SQLiteRepository(string connectionString)
         {
@@ -44,8 +44,8 @@ namespace App.Services
                 $"INSERT INTO tasks (title, description, created, due, is_done) VALUES (" +
                 $"'{newTask.Title}', " +
                 $"'{newTask.Description}', " +
-                $"'{newTask.Created}', " +
-                $"'{newTask.Due}', " +
+                $"'{newTask.Created:o}', " +
+                $"'{newTask.Due:o}', " +
                 $"{newTask.IsDone});"
                 );
 
@@ -69,7 +69,7 @@ namespace App.Services
 
         public void UpdateTaskDueTime(int task_id, DateTimeOffset newDue)
         {
-            ExecuteSQLiteQuery($"UPDATE tasks SET due = '{newDue}' WHERE task_id = {task_id};");
+            ExecuteSQLiteQuery($"UPDATE tasks SET due = '{newDue:o}' WHERE task_id = {task_id};");
         }
 
         public Task GetTask(int task_id)

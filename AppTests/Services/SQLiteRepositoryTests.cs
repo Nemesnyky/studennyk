@@ -86,7 +86,7 @@ namespace AppTests.Services
             repository.UpdateTaskDueTime(task.Id, expected);
             DateTimeOffset actual = repository.GetTask(task.Id).Due;
 
-            Assert.Equal(expected.ToString(), actual.ToString());
+            Assert.Equal(expected, actual);
         }
 
         [Fact]
