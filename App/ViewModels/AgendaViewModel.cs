@@ -1,7 +1,7 @@
 using System.Collections.ObjectModel;
 using App.Models;
 using CommunityToolkit.Mvvm.Input;
- 
+
 namespace App.ViewModels
 {
     public partial class AgendaViewModel
@@ -58,9 +58,10 @@ namespace App.ViewModels
 
             var taskGroup = TaskGroups.First(t => t.Date.Hour == task.Due.Hour);
 
-            if (taskGroup.Any(t => t.Id != task.Id)) {
+            if (taskGroup.Any(t => t.Id != task.Id))
+            {
                 taskGroup.Remove(task);
-            } 
+            }
             else
             {
                 TaskGroups.Remove(taskGroup);
@@ -81,8 +82,8 @@ namespace App.ViewModels
             CompleteTask(dragged.Id);
             dragged = null;
         }
-        
 
-       
+
+
     }
 }
