@@ -2,33 +2,24 @@ using System.Collections.ObjectModel;
 
 namespace App.Models
 {
-    
-public class TaskModel
-{
-    public int Id { get; set; }
-    public string Title { get; set; }
-    public string Description { get; set; }
-    public DateTimeOffset Created { get; set; }
-    public DateTimeOffset Due { get; set; }
-    public bool IsDone { get; set; }
 
-    public TaskModel(int id, string title, string description, DateTimeOffset created, DateTimeOffset due, bool isDone)
+    public class TaskModel
     {
-        Id = id;
-        Title = title;
-        Description = description;
-        Created = created;
-        Due = due;
-        IsDone = isDone;
-    }
-}
-    public class TaskGroup : ObservableCollection<TaskModel>
-    {
-        public DateTimeOffset Date { get; private set; }
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public DateTimeOffset Created { get; set; }
+        public DateTimeOffset Due { get; set; }
+        public bool IsDone { get; set; }
 
-        public TaskGroup(DateTimeOffset date, IEnumerable<TaskModel> tasks) : base(tasks)
+        public TaskModel(int id, string title, string description, DateTimeOffset created, DateTimeOffset due, bool isDone)
         {
-            Date = date;
+            Id = id;
+            Title = title;
+            Description = description;
+            Created = created;
+            Due = due;
+            IsDone = isDone;
         }
     }
 }

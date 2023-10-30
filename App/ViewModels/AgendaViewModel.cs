@@ -1,9 +1,19 @@
 using System.Collections.ObjectModel;
 using App.Models;
 using CommunityToolkit.Mvvm.Input;
- 
+
 namespace App.ViewModels
 {
+    public class TaskGroup : ObservableCollection<TaskModel>
+    {
+        public DateTimeOffset Date { get; private set; }
+
+        public TaskGroup(DateTimeOffset date, IEnumerable<TaskModel> tasks) : base(tasks)
+        {
+            Date = date;
+        }
+    }
+
     public partial class AgendaViewModel
     {
         private TaskController taskController;
@@ -58,9 +68,10 @@ namespace App.ViewModels
 
             var taskGroup = TaskGroups.First(t => t.Date.Hour == task.Due.Hour);
 
-            if (taskGroup.Any(t => t.Id != task.Id)) {
+            if (taskGroup.Any(t => t.Id != task.Id))
+            {
                 taskGroup.Remove(task);
-            } 
+            }
             else
             {
                 TaskGroups.Remove(taskGroup);
@@ -81,8 +92,8 @@ namespace App.ViewModels
             CompleteTask(dragged.Id);
             dragged = null;
         }
-        
 
-       
+
+
     }
 }
