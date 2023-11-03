@@ -1,14 +1,15 @@
 using System.Collections.ObjectModel;
 using App.Models;
 using CommunityToolkit.Mvvm.Input;
+using Task = App.Models.Task;
 
 namespace App.ViewModels
 {
-    public class TaskGroup : ObservableCollection<TaskModel>
+    public class TaskGroup : ObservableCollection<Task>
     {
         public DateTimeOffset Date { get; private set; }
 
-        public TaskGroup(DateTimeOffset date, IEnumerable<TaskModel> tasks) : base(tasks)
+        public TaskGroup(DateTimeOffset date, IEnumerable<Task> tasks) : base(tasks)
         {
             Date = date;
         }
@@ -17,22 +18,22 @@ namespace App.ViewModels
     public partial class AgendaViewModel
     {
         private TaskController taskController;
-        private TaskModel dragged;
+        private Task dragged;
 
-        private List<TaskModel> tasks;
+        private List<Task> tasks;
         public ObservableCollection<TaskGroup> TaskGroups { get; set; }
 
         public AgendaViewModel()
         {
             taskController = new TaskController();
-            tasks = new List<TaskModel>();
+            tasks = new List<Task>();
             TaskGroups = new ObservableCollection<TaskGroup>();
-            Task.Run(async () => { await LoadTasks(0); });
+            System.Threading.Tasks.Task.Run(async () => { await LoadTasks(0); });
         }
 
-        private async Task LoadTasks(int userId)
+        private async System.Threading.Tasks.Task LoadTasks(int userId)
         {
-            var taskList = await Task.Run(() => taskController.GetTaskList(userId));
+            var taskList = await System.Threading.Tasks.Task.Run(() => taskController.GetTaskList(userId));
 
             var dates = new List<DateTimeOffset>();
 
@@ -54,10 +55,10 @@ namespace App.ViewModels
             }
         }
 
-        public async Task DeleteTask(int taskId)
+        public async System.Threading.Tasks.Task DeleteTask(int taskId)
         {
             tasks.Remove(tasks.Single(t => t.Id == taskId));
-            await Task.Run(() => taskController.DeleteTask(taskId));
+            await System.Threading.Tasks.Task.Run(() => taskController.DeleteTask(taskId));
         }
 
 
@@ -77,11 +78,11 @@ namespace App.ViewModels
                 TaskGroups.Remove(taskGroup);
             }
 
-            Task.Run(() => taskController.CompleteTask(taskId));
+            System.Threading.Tasks.Task.Run(() => taskController.CompleteTask(taskId));
         }
 
         [RelayCommand]
-        private void DragStarted(TaskModel task)
+        private void DragStarted(Task task)
         {
             dragged = task;
         }

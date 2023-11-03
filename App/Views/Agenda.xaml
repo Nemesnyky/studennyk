@@ -39,7 +39,7 @@
                     </DataTemplate>
                 </CollectionView.GroupHeaderTemplate>
                 <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="models:TaskModel">
+                    <DataTemplate x:DataType="models:Task">
                         <Frame HeightRequest="60" Padding="5" BorderColor="Transparent">
                             <Frame HeightRequest="50" Padding="0" HasShadow="true" BorderColor="Transparent">
                                 <Frame.Shadow>

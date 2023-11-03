@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 namespace App.Models
 {
 
-    public class TaskModel
+    public class Task
     {
         public int Id { get; set; }
         public string Title { get; set; }
@@ -12,7 +12,7 @@ namespace App.Models
         public DateTimeOffset Due { get; set; }
         public bool IsDone { get; set; }
 
-        public TaskModel(int id, string title, string description, DateTimeOffset created, DateTimeOffset due, bool isDone)
+        public Task(int id, string title, string description, DateTimeOffset created, DateTimeOffset due, bool isDone)
         {
             Id = id;
             Title = title;
