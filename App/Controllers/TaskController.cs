@@ -38,4 +38,3 @@ public class TaskController
         return new Task(id, title, description, created, due, false);
     }
 }
-
