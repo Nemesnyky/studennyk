@@ -43,7 +43,7 @@
                     <DataTemplate x:DataType="models:Task">
                         <Frame HeightRequest="50" Padding="5,0,0,0" BackgroundColor="{StaticResource Gray30}"
                                BorderColor="Transparent">
-                            <Label VerticalTextAlignment="Center" FontSize="16" Padding="10,0,0,0"
+                            <Label VerticalTextAlignment="Center" FontSize="16" Padding="10,0,0,0" TextColor="{StaticResource Text}"
                                    Text="{Binding Title}">
                             </Label>
                             <Frame.GestureRecognizers>
