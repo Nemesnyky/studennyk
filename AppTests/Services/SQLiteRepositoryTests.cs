@@ -1,4 +1,5 @@
 ﻿using App.Services;
+using Task = App.Models.Task;
 
 namespace AppTests.Services
 {
