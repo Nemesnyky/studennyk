@@ -5,12 +5,13 @@
              x:Class="App.Views.MainPage">
     <Grid Padding="0">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="350"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="0.2*"/>
+            <ColumnDefinition Width="0.7*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        <Frame Margin="20" CornerRadius="15" BackgroundColor="{StaticResource Gray30}" VerticalOptions="Fill" HorizontalOptions="Fill"></Frame>
         
         <views:Agenda Grid.Column="1" />
     </Grid>

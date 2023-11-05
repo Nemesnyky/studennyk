@@ -21,7 +21,8 @@
         <Grid Grid.Row="0" Padding="0" BackgroundColor="Transparent">
             <Label Text="{Binding Source={x:Static sys:DateTime.Now},
           StringFormat='{}{0:dd MMMM}'}"
-                   FontFamily="LibreFranklinBold" FontSize="28" HeightRequest="50"/>
+                   TextColor="{StaticResource Accent}"
+                   FontFamily="LibreFranklinBold" FontSize="29" HeightRequest="50" VerticalTextAlignment="End" />
         </Grid>
 
         <Grid Grid.Row="1" Padding="0" BackgroundColor="Transparent">
@@ -32,7 +33,7 @@
                 <CollectionView.GroupHeaderTemplate>
                     <DataTemplate x:DataType="viewModels:TaskGroup">
                         <Label FontFamily="LibreFranklinSemiBold" Padding="0, 25, 0, 0"
-                               TextColor="{StaticResource Gray600}" VerticalTextAlignment="Center"
+                               TextColor="{StaticResource Accent}" Opacity="0.7" VerticalTextAlignment="Center"
                                HorizontalTextAlignment="Start" WidthRequest="100" FontSize="16" HeightRequest="49"
                                Text="{Binding Date, StringFormat='{0:HH}:00'}">
                         </Label>
@@ -40,30 +41,28 @@
                 </CollectionView.GroupHeaderTemplate>
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:Task">
-                        <Frame HeightRequest="60" Padding="5" BorderColor="Transparent">
-                            <Frame HeightRequest="50" Padding="0" HasShadow="true" BorderColor="Transparent">
-                                <Frame.Shadow>
-                                    <Shadow Brush="#9da6ad" Offset="0,0" Radius="2" Opacity="1" />
-                                </Frame.Shadow>
-                                <Label VerticalTextAlignment="Center" FontSize="16" Padding="10,0,0,0"
-                                       Text="{Binding Title}">
-                                </Label>
+                        <Frame HeightRequest="50" Padding="5,0,0,0" BackgroundColor="{StaticResource Gray30}"
+                               BorderColor="Transparent">
+                            <Label VerticalTextAlignment="Center" FontSize="16" Padding="10,0,0,0"
+                                   Text="{Binding Title}">
+                            </Label>
                             <Frame.GestureRecognizers>
                                 <DragGestureRecognizer
                                     DragStartingCommand="{Binding Source={x:RelativeSource AncestorType={x:Type viewModels:AgendaViewModel}}, Path=DragStartedCommand}"
                                     DragStartingCommandParameter="{Binding .}" />
                             </Frame.GestureRecognizers>
-                            </Frame>
                         </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </Grid>
-        <Grid Grid.Row="2" BackgroundColor="Transparent">
-            <Image Source="image_done.png" Aspect="AspectFit" VerticalOptions="Center"/>
-            <Grid.GestureRecognizers>
-                <DropGestureRecognizer DropCommand="{Binding TaskDroppedCommand}" />
-            </Grid.GestureRecognizers>
+        <Grid Grid.Row="2" Padding="20, 10, 20, 0" BackgroundColor="Transparent">
+            <Frame BackgroundColor="#8FCB2E" CornerRadius="15" Padding="0" VerticalOptions="Fill" HorizontalOptions="Fill">
+                <Rectangle BackgroundColor="Transparent"></Rectangle>
+                <Frame.GestureRecognizers>
+                    <DropGestureRecognizer DropCommand="{Binding TaskDroppedCommand}" />
+                </Frame.GestureRecognizers>
+            </Frame>
         </Grid>
 
     </Grid>
