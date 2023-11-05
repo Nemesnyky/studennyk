@@ -41,7 +41,7 @@ public class TaskController
         return new Task(id, title, description, created, due, false);
     }
 
-    public async System.Threading.Tasks.Task CompleteTask(int taskId)
+    public async System.Threading.Tasks.Task CompleteTask(long taskId)
     {
         await System.Threading.Tasks.Task.Delay(10);
     }

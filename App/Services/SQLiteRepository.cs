@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.Sqlite;
+using Task = App.Models.Task;
 
 namespace App.Services
 {

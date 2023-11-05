@@ -62,7 +62,7 @@ namespace App.ViewModels
         }
 
 
-        private void CompleteTask(int taskId)
+        private void CompleteTask(long taskId)
         {
             var task = tasks.First(t => t.Id == taskId);
             task.IsDone = true;
