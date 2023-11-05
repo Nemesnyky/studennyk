@@ -19,7 +19,7 @@
 
         <Label Text="{Binding Source={x:Static sys:DateTime.Now},
           StringFormat='{}{0:dd-MMMM-yyyy hh:mm:ss}'}" />
-
+        
 
         <CollectionView ItemsSource="{Binding TaskGroups}" IsGrouped="True">
             <CollectionView.ItemsLayout>
@@ -27,8 +27,8 @@
             </CollectionView.ItemsLayout>
             <CollectionView.GroupHeaderTemplate>
                 <DataTemplate x:DataType="viewModels:TaskGroup">
-                    <Frame Padding="0" BorderColor="Transparent">
-                        <Label FontFamily="LibreFranklinSemiBold" VerticalTextAlignment="Center" WidthRequest="100" FontSize="16" HeightRequest="50" Padding="0"
+                    <Frame Padding="0" HeightRequest="24" WidthRequest="889" BorderColor="Transparent">
+                        <Label Style="{StaticResource SpecifiedTime}" FontFamily="LibreFranklinSemiBold" VerticalTextAlignment="Center"
                                Text="{Binding Date, StringFormat='{0:HH}:00'}">
                         </Label>
                     </Frame>
@@ -36,8 +36,8 @@
             </CollectionView.GroupHeaderTemplate>
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:TaskModel">
-                    <Frame Padding="0">
-                        <Label HeightRequest="50" VerticalTextAlignment="Center" Padding="10,0,0,0"
+                    <Frame Padding="0" CornerRadius="15" HeightRequest="45" >
+                        <Label VerticalTextAlignment="Center" FontSize="20" FontFamily="LibreFranklinSemiBold" TextColor="#343422" Padding="21,0,0,0"
                                Text="{Binding Title}">
                         </Label>
                         <Frame.GestureRecognizers>
