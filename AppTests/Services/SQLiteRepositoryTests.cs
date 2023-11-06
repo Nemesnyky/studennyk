@@ -1,4 +1,4 @@
-﻿using App.Services;
+﻿using App.Repositories;
 using Task = App.Models.Task;
 
 namespace AppTests.Services
