@@ -1,4 +1,6 @@
-﻿namespace App.Services
+﻿using Task = App.Models.Task;
+
+namespace App.Services
 {
     interface IRepository
     {

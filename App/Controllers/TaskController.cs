@@ -1,3 +1,6 @@
+using App.Models;
+using Task = App.Models.Task;
+
 public class TaskController
 {
     private Random random = new Random();
@@ -36,5 +39,10 @@ public class TaskController
         DateTimeOffset due = created.AddDays(random.Next(1, 7));
 
         return new Task(id, title, description, created, due, false);
+    }
+
+    public async System.Threading.Tasks.Task CompleteTask(long taskId)
+    {
+        await System.Threading.Tasks.Task.Delay(10);
     }
 }

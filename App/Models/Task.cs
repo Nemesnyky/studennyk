@@ -1,3 +1,5 @@
+namespace App.Models
+{
 public class Task
 {
     public long Id { get; set; }
@@ -35,4 +37,6 @@ public class Task
     {
         return HashCode.Combine(Id, Title, Description, Created, Due, IsDone);
     }
+}
+
 }
