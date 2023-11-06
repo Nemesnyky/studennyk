@@ -1,6 +1,6 @@
 ﻿using Task = App.Models.Task;
 
-namespace App.Services
+namespace App.Repositories
 {
     interface IRepository
     {
