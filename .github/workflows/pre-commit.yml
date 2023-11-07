@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4.1.1
         with:
-          fetch-depth: 0 
+          fetch-depth: 0
       - run: |
           $commitMessage = git log -1 --pretty=format:%s
           if ($commitMessage.Contains("[pre-commit.ci lite]")) {
