@@ -12,11 +12,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4.1.1
       - run: |
-          commit_message=$(git log -1 --pretty=format:%s)
-          if [[ "$commit_message" == *"[pre-commit.ci lite]"* ]]; then
-            echo "Commit is from pre-commit, skipping..."
+          $commitMessage = git log -1 --pretty=format:%s
+          if ($commitMessage -like "*[pre-commit.ci lite]*") {
+            Write-Host "Commit message contains [pre-commit.ci lite], exiting workflow."
             exit 0
-          fi
+          }
       - uses: actions/setup-python@v4.7.1
       - uses: pre-commit/action@v3.0.0
       - uses: pre-commit-ci/lite-action@v1.0.1
