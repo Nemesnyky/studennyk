@@ -11,6 +11,7 @@
 
 		<!-- Display name -->
 		<ApplicationTitle>Studennyk</ApplicationTitle>
+		<RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
 
 		<!-- App Identifier -->
 		<ApplicationId>com.nemesnyky.studennyk</ApplicationId>
