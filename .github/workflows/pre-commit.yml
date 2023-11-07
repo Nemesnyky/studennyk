@@ -13,15 +13,11 @@ jobs:
       - uses: actions/checkout@v4.1.1
         with:
           fetch-depth: 0
-      - run: |
-          $commitMessage = git log -1 --pretty=format:%s
-          if ($commitMessage.Contains("[pre-commit.ci lite]")) {
-            Write-Host "Commit message contains [pre-commit.ci lite], exiting workflow."
-            exit 0
-          }
       - uses: actions/setup-python@v4.7.1
       - uses: pre-commit/action@v3.0.0
         with:
           extra_args: --color=always --from-ref ${{ github.event.pull_request.base.sha }} --to-ref ${{ github.event.pull_request.head.sha }}
       - uses: pre-commit-ci/lite-action@v1.0.1
         if: always()
+        with:
+          msg: "[skip ci] [pre-commit.ci lite] apply automatic fixes"
