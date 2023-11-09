@@ -17,7 +17,7 @@ namespace App.ViewModels
 
     public partial class AgendaViewModel
     {
-        private TaskController taskController;
+        private TaskListViewModel taskListVM;
         private Task dragged;
 
         private List<Task> tasks;
@@ -25,15 +25,15 @@ namespace App.ViewModels
 
         public AgendaViewModel()
         {
-            taskController = new TaskController();
+            taskListVM = new TaskListViewModel();
             tasks = new List<Task>();
             TaskGroups = new ObservableCollection<TaskGroup>();
-            System.Threading.Tasks.Task.Run(async () => { await LoadTasks(0); });
+            System.Threading.Tasks.Task.Run(async () => { await LoadTasks(); });
         }
 
-        private async System.Threading.Tasks.Task LoadTasks(int userId)
+        private async System.Threading.Tasks.Task LoadTasks()
         {
-            var taskList = await System.Threading.Tasks.Task.Run(() => taskController.GetTaskList(userId));
+            var taskList = await System.Threading.Tasks.Task.Run(() => this.taskListVM.GetTaskList());
 
             var dates = new List<DateTimeOffset>();
 
@@ -58,7 +58,7 @@ namespace App.ViewModels
         public async System.Threading.Tasks.Task DeleteTask(int taskId)
         {
             tasks.Remove(tasks.Single(t => t.Id == taskId));
-            await System.Threading.Tasks.Task.Run(() => taskController.DeleteTask(taskId));
+            await System.Threading.Tasks.Task.Run(() => taskListVM.DeleteTask(taskId));
         }
 
 
@@ -78,7 +78,7 @@ namespace App.ViewModels
                 TaskGroups.Remove(taskGroup);
             }
 
-            System.Threading.Tasks.Task.Run(() => taskController.CompleteTask(taskId));
+            System.Threading.Tasks.Task.Run(() => taskListVM.CompleteTask(taskId));
         }
 
         [RelayCommand]
@@ -93,8 +93,5 @@ namespace App.ViewModels
             CompleteTask(dragged.Id);
             dragged = null;
         }
-
-
-
     }
 }
