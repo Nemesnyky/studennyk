@@ -1,4 +1,5 @@
-﻿using App.Services;
+﻿using App.Repositories;
+using Task = App.Models.Task;
 
 namespace AppTests.Services
 {
@@ -36,7 +37,7 @@ namespace AppTests.Services
         }
 
         [Fact]
-        public void AddTaskTest()
+        public void ShouldHaveTheTask()
         {
             Task expected = task;
 
@@ -46,7 +47,7 @@ namespace AppTests.Services
         }
 
         [Fact]
-        public void DeleteTaskTest()
+        public void ShouldDeleteTask()
         {
             Task? expected = null;
 
@@ -57,7 +58,7 @@ namespace AppTests.Services
         }
 
         [Fact]
-        public void UpdateTaskTitleTest()
+        public void ShouldUpdateTaskTitle()
         {
             string expected = "newTitle";
 
@@ -68,7 +69,7 @@ namespace AppTests.Services
         }
 
         [Fact]
-        public void UpdateTaskDescriptionTest()
+        public void ShouldUpdateTaskDescription()
         {
             string expected = "newDescription";
 
@@ -79,7 +80,7 @@ namespace AppTests.Services
         }
 
         [Fact]
-        public void UpdateTaskDueTimeTest()
+        public void ShouldUpdateTaskDueTime()
         {
             DateTimeOffset expected = DateTimeOffset.Now;
 
@@ -90,7 +91,7 @@ namespace AppTests.Services
         }
 
         [Fact]
-        public void GetTasksTest()
+        public void ShouldGetTasks()
         {
             var expected = new List<Task> { task, GenerateRandomTask(), GenerateRandomTask() };
 

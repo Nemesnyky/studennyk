@@ -1,6 +1,7 @@
 ﻿using Microsoft.Data.Sqlite;
+using Task = App.Models.Task;
 
-namespace App.Services
+namespace App.Repositories
 {
     public class SQLiteRepository : IRepository, IDisposable
     {
