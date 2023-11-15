@@ -50,7 +50,7 @@ namespace App.Repositories
                 $"'{newTask.Description}', " +
                 $"'{newTask.Created:o}', " +
                 $"'{newTask.Due:o}', " +
-                $"{newTask.IsDone});"
+                $"{(newTask.IsDone ? 1 : 0)});"
                 );
 
             return GetIdOfLastAddedTask();
@@ -63,7 +63,7 @@ namespace App.Repositories
 
         public void DoneTask(long task_id)
         {
-            ExecuteSQLiteQuery($"UPDATE tasks SET title = '{Task.DONE}' WHERE task_id = {task_id};");
+            ExecuteSQLiteQuery($"UPDATE tasks SET is_done = '{(Task.DONE ? 1 : 0)}' WHERE task_id = {task_id};");
         }
 
         public void UpdateTaskTitle(long task_id, string newTitle)

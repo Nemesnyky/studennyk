@@ -11,23 +11,8 @@ namespace AppTests.Services
         public SQLiteRepositoryTests()
         {
             repository = new SQLiteRepository("Data Source=:memory:");
-            task = GenerateRandomTask();
+            task = App.Temporary.Generator.GenerateRandomTask();
             task.Id = repository.AddTask(task);
-        }
-
-        public static Task GenerateRandomTask()
-        {
-            Random random = new Random();
-            string[] titles = { "Buy groceries", "Finish project", "Call mom", "Exercise", "Read a book", "Clean the house" };
-            string lorem = "qwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnmqazwsxedcrfvtgbyhnujmikolp";
-            return new Task(
-                0,
-                titles[random.Next(titles.Length)],
-                lorem.Substring(random.Next(0, lorem.Length / 2), random.Next(1, lorem.Length / 2)),
-                DateTimeOffset.Now.AddDays(random.Next(1000)),
-                DateTimeOffset.Now.AddDays(random.Next(1000)),
-                random.Next(2) == 1
-                );
         }
 
         public void Dispose()
@@ -53,6 +38,17 @@ namespace AppTests.Services
 
             repository.DeleteTask(task.Id);
             Task actual = repository.GetTask(task.Id);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void ShouldDoneTask()
+        {
+            bool expected = Task.DONE;
+
+            repository.DoneTask(task.Id);
+            bool actual = repository.GetTask(task.Id).IsDone;
 
             Assert.Equal(expected, actual);
         }
@@ -93,7 +89,11 @@ namespace AppTests.Services
         [Fact]
         public void ShouldGetTasks()
         {
-            var expected = new List<Task> { task, GenerateRandomTask(), GenerateRandomTask() };
+            var expected = new List<Task> { 
+                task,
+                App.Temporary.Generator.GenerateRandomTask(), 
+                App.Temporary.Generator.GenerateRandomTask()
+            };
 
             expected[1].Id = repository.AddTask(expected[1]);
             expected[2].Id = repository.AddTask(expected[2]);
