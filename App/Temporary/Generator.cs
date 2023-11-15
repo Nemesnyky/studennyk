@@ -16,7 +16,7 @@ namespace App.Temporary
             DateTimeOffset created = DateTimeOffset.Now.AddDays(random.Next(1, 3)).AddHours(random.Next(1, 12));
             DateTimeOffset due = created.AddDays(random.Next(1, 7));
 
-            return new Task(Task.DEFAULT_ID, title, description, created, due, false);
+            return new Task(Task.DEFAULT_ID, title, description, created, due, Task.NOT_DONE);
         }
     }
 }

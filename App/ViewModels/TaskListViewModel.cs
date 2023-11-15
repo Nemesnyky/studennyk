@@ -38,13 +38,13 @@ namespace App.ViewModels
             return repository.GetTasks();
         }
 
-        public void DeleteTask(long taskId)
+        public void DeleteTask(long task_id)
         {
-            repository.DeleteTask(taskId);
+            repository.DeleteTask(task_id);
             //Tasks.Remove(Tasks.Single(t => t.Id == taskId));
         }
 
-        public async ThreadTask CompleteTask(long taskId)
+        public async ThreadTask CompleteTask(long task_id)
         {
             //TODO
             await ThreadTask.Delay(10);

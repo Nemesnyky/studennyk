@@ -10,7 +10,7 @@ namespace App.Repositories
 
         ///<summary>
         ///<para>If you need to open/create a database, use the following argument: "Data Source=name.db";</para>
-        ///<para>If you need a temporary database, don't use any arguments;</para>
+        ///<para>If you need a temporary in-memory database, don't use any arguments;</para>
         ///</summary>
         public SQLiteRepository(string connectionString = "Data Source=:memory:")
         {
@@ -18,7 +18,9 @@ namespace App.Repositories
             connection.Open();
             command = connection.CreateCommand();
             if (!TableExists("tasks"))
+            {
                 CreateTasksTable();
+            }
         }
 
         private bool TableExists(string tableName)
@@ -59,6 +61,11 @@ namespace App.Repositories
             ExecuteSQLiteQuery($"DELETE FROM tasks WHERE task_id = {task_id};");
         }
 
+        public void DoneTask(long task_id)
+        {
+            ExecuteSQLiteQuery($"UPDATE tasks SET title = '{Task.DONE}' WHERE task_id = {task_id};");
+        }
+
         public void UpdateTaskTitle(long task_id, string newTitle)
         {
             ExecuteSQLiteQuery($"UPDATE tasks SET title = '{newTitle}' WHERE task_id = {task_id};");
@@ -76,7 +83,7 @@ namespace App.Repositories
 
         public Task GetTask(long task_id)
         {
-            IEnumerable<Task> tasks = GetTasksFromReader($"WHERE  task_id = {task_id}");
+            var tasks = GetTasksFromReader($"WHERE  task_id = {task_id}");
 
             return tasks.Any() ? tasks.First() : null;
         }
@@ -101,19 +108,21 @@ namespace App.Repositories
 
         private IEnumerable<Task> GetTasksFromReader(string where = "")
         {
-            var tasks = new List<Task>();
+            List<Task> tasks = new();
             command.CommandText = $"SELECT * FROM tasks {where};";
             using var reader = command.ExecuteReader();
 
             while (reader.Read())
+            {
                 tasks.Add(new Task(
-                    reader.GetInt32(0),
+                    reader.GetInt64(0),
                     reader.GetString(1),
                     reader.GetString(2),
                     reader.GetDateTimeOffset(3),
                     reader.GetDateTimeOffset(4),
                     reader.GetBoolean(5))
                     );
+            }
 
             return tasks;
         }
