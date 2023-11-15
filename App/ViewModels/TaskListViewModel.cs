@@ -44,10 +44,10 @@ namespace App.ViewModels
             //Tasks.Remove(Tasks.Single(t => t.Id == taskId));
         }
 
-        public async ThreadTask CompleteTask(long task_id)
+        public void CompleteTask(long task_id)
         {
-            //TODO
-            await ThreadTask.Delay(10);
+            repository.DoneTask(task_id);
+            //await ThreadTask.Delay(10);
         }
     }
 
