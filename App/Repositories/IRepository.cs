@@ -2,7 +2,7 @@
 
 namespace App.Repositories
 {
-    interface IRepository
+    public interface IRepository
     {
         long AddTask(Task newTask);
         void DeleteTask(long task_id);

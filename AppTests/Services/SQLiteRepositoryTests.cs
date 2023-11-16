@@ -11,7 +11,7 @@ namespace AppTests.Services
         public SQLiteRepositoryTests()
         {
             repository = new SQLiteRepository("Data Source=:memory:");
-            task = App.Temporary.Generator.GenerateRandomTask();
+            task = App.Temporary.Generators.GenerateRandomTask();
             task.Id = repository.AddTask(task);
         }
 
@@ -91,8 +91,8 @@ namespace AppTests.Services
         {
             var expected = new List<Task> { 
                 task,
-                App.Temporary.Generator.GenerateRandomTask(), 
-                App.Temporary.Generator.GenerateRandomTask()
+                App.Temporary.Generators.GenerateRandomTask(), 
+                App.Temporary.Generators.GenerateRandomTask()
             };
 
             expected[1].Id = repository.AddTask(expected[1]);

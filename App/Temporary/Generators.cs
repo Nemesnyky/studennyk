@@ -2,7 +2,7 @@
 
 namespace App.Temporary
 {
-    public static class Generator
+    public static class Generators
     {
         private static readonly Random random = new();
 
