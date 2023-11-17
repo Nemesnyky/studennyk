@@ -33,7 +33,7 @@ namespace App.ViewModels
 
         private async ThreadTask LoadTasks()
         {
-            var taskList = await ThreadTask.Run(() => this.taskListVM.GetTaskList());
+            var taskList = await ThreadTask.Run(() => taskListVM.GetTaskList());
 
             var dates = new List<DateTimeOffset>();
 

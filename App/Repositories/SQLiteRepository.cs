@@ -56,34 +56,34 @@ namespace App.Repositories
             return GetIdOfLastAddedTask();
         }
 
-        public void DeleteTask(long task_id)
+        public void DeleteTask(long taskId)
         {
-            ExecuteSQLiteQuery($"DELETE FROM tasks WHERE task_id = {task_id};");
+            ExecuteSQLiteQuery($"DELETE FROM tasks WHERE task_id = {taskId};");
         }
 
-        public void CompleteTask(long task_id)
+        public void CompleteTask(long taskId)
         {
-            ExecuteSQLiteQuery($"UPDATE tasks SET is_done = '{(Task.DONE ? 1 : 0)}' WHERE task_id = {task_id};");
+            ExecuteSQLiteQuery($"UPDATE tasks SET is_done = '{(Task.DONE ? 1 : 0)}' WHERE task_id = {taskId};");
         }
 
-        public void UpdateTaskTitle(long task_id, string newTitle)
+        public void UpdateTaskTitle(long taskId, string newTitle)
         {
-            ExecuteSQLiteQuery($"UPDATE tasks SET title = '{newTitle}' WHERE task_id = {task_id};");
+            ExecuteSQLiteQuery($"UPDATE tasks SET title = '{newTitle}' WHERE task_id = {taskId};");
         }
 
-        public void UpdateTaskDescription(long task_id, string newDescription)
+        public void UpdateTaskDescription(long taskId, string newDescription)
         {
-            ExecuteSQLiteQuery($"UPDATE tasks SET description = '{newDescription}' WHERE task_id = {task_id};");
+            ExecuteSQLiteQuery($"UPDATE tasks SET description = '{newDescription}' WHERE task_id = {taskId};");
         }
 
-        public void UpdateTaskDueTime(long task_id, DateTimeOffset newDue)
+        public void UpdateTaskDueTime(long taskId, DateTimeOffset newDue)
         {
-            ExecuteSQLiteQuery($"UPDATE tasks SET due = '{newDue:o}' WHERE task_id = {task_id};");
+            ExecuteSQLiteQuery($"UPDATE tasks SET due = '{newDue:o}' WHERE task_id = {taskId};");
         }
 
-        public Task GetTask(long task_id)
+        public Task GetTask(long taskId)
         {
-            var tasks = GetTasksFromReader($"WHERE  task_id = {task_id}");
+            var tasks = GetTasksFromReader($"WHERE  task_id = {taskId}");
 
             return tasks.Any() ? tasks.First() : null;
         }

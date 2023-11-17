@@ -5,12 +5,12 @@ namespace App.Repositories
     public interface IRepository
     {
         long AddTask(Task newTask);
-        void DeleteTask(long task_id);
-        void CompleteTask(long task_id);
-        void UpdateTaskTitle(long task_id, string newTitle);
-        void UpdateTaskDescription(long task_id, string newDescription);
-        void UpdateTaskDueTime(long task_id, DateTimeOffset newDue);
-        Task GetTask(long task_id);
+        void DeleteTask(long taskId);
+        void CompleteTask(long taskId);
+        void UpdateTaskTitle(long taskId, string newTitle);
+        void UpdateTaskDescription(long taskId, string newDescription);
+        void UpdateTaskDueTime(long taskId, DateTimeOffset newDue);
+        Task GetTask(long taskId);
         IEnumerable<Task> GetTasks();
     }
 }
