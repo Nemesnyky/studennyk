@@ -17,14 +17,14 @@ namespace App.ViewModels
             repository = AppServiceProvider.GetService<IRepository>();
             LoadTasks();
         }
-        
+
         public void LoadTasks()
         {
             Tasks.Clear();
             foreach (var task in repository.GetTasks())
                 Tasks.Add(task);
         }
-        
+
         public List<Task> GetTaskList()
         {
             return Tasks.ToList();

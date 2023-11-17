@@ -89,9 +89,9 @@ namespace AppTests.Services
         [Fact]
         public void ShouldGetTasks()
         {
-            var expected = new List<Task> { 
+            var expected = new List<Task> {
                 task,
-                App.Temporary.Generators.GenerateRandomTask(), 
+                App.Temporary.Generators.GenerateRandomTask(),
                 App.Temporary.Generators.GenerateRandomTask()
             };
 
