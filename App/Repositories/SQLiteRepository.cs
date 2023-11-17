@@ -61,7 +61,7 @@ namespace App.Repositories
             ExecuteSQLiteQuery($"DELETE FROM tasks WHERE task_id = {task_id};");
         }
 
-        public void DoneTask(long task_id)
+        public void CompleteTask(long task_id)
         {
             ExecuteSQLiteQuery($"UPDATE tasks SET is_done = '{(Task.DONE ? 1 : 0)}' WHERE task_id = {task_id};");
         }

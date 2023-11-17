@@ -6,7 +6,7 @@ namespace App.Repositories
     {
         long AddTask(Task newTask);
         void DeleteTask(long task_id);
-        void DoneTask(long task_id);
+        void CompleteTask(long task_id);
         void UpdateTaskTitle(long task_id, string newTitle);
         void UpdateTaskDescription(long task_id, string newDescription);
         void UpdateTaskDueTime(long task_id, DateTimeOffset newDue);

@@ -38,7 +38,7 @@ namespace App.ViewModels
 
         public void CompleteTask(long task_id)
         {
-            repository.DoneTask(task_id);
+            repository.CompleteTask(task_id);
             int i = Tasks.IndexOf(Tasks.Single(t => t.Id == task_id));
             Tasks[i].IsDone = true;
             //await ThreadTask.Delay(10);

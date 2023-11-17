@@ -47,7 +47,7 @@ namespace AppTests.Services
         {
             bool expected = Task.DONE;
 
-            repository.DoneTask(task.Id);
+            repository.CompleteTask(task.Id);
             bool actual = repository.GetTask(task.Id).IsDone;
 
             Assert.Equal(expected, actual);
