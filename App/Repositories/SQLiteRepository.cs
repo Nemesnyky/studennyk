@@ -61,11 +61,6 @@ namespace App.Repositories
             ExecuteSQLiteQuery($"DELETE FROM tasks WHERE task_id = {taskId};");
         }
 
-        public void CompleteTask(long taskId)
-        {
-            ExecuteSQLiteQuery($"UPDATE tasks SET is_done = '{(Task.DONE ? 1 : 0)}' WHERE task_id = {taskId};");
-        }
-
         public void UpdateTaskTitle(long taskId, string newTitle)
         {
             ExecuteSQLiteQuery($"UPDATE tasks SET title = '{newTitle}' WHERE task_id = {taskId};");
@@ -79,6 +74,14 @@ namespace App.Repositories
         public void UpdateTaskDueTime(long taskId, DateTimeOffset newDue)
         {
             ExecuteSQLiteQuery($"UPDATE tasks SET due = '{newDue:o}' WHERE task_id = {taskId};");
+        }
+
+        public void UpdateTaskStatus(long taskId, bool newStatus)
+        {
+            if (GetTask(taskId).IsDone == newStatus)
+                throw new ArgumentException($"An attempt to change the status of a task to the one it had before. task_id = {taskId}, status = {newStatus}");
+
+            ExecuteSQLiteQuery($"UPDATE tasks SET is_done = '{(newStatus ? 1 : 0)}' WHERE task_id = {taskId};");
         }
 
         public Task GetTask(long taskId)

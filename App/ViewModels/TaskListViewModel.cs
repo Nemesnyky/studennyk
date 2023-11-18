@@ -39,7 +39,7 @@ namespace App.ViewModels
 
         public void CompleteTask(long taskId)
         {
-            repository.CompleteTask(taskId);
+            repository.UpdateTaskStatus(taskId, Task.DONE);
             int i = Tasks.IndexOf(Tasks.Single(t => t.Id == taskId));
             Tasks[i].IsDone = true;
         }

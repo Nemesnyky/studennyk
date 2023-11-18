@@ -44,17 +44,6 @@ namespace AppTests.Services
         }
 
         [Fact]
-        public void ShouldDoneTask()
-        {
-            bool expected = Task.DONE;
-
-            repository.CompleteTask(task.Id);
-            bool actual = repository.GetTask(task.Id).IsDone;
-
-            Assert.Equal(expected, actual);
-        }
-
-        [Fact]
         public void ShouldUpdateTaskTitle()
         {
             string expected = "newTitle";
@@ -83,6 +72,17 @@ namespace AppTests.Services
 
             repository.UpdateTaskDueTime(task.Id, expected);
             DateTimeOffset actual = repository.GetTask(task.Id).Due;
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void ShouldDoneTask()
+        {
+            bool expected = Task.DONE;
+
+            repository.UpdateTaskStatus(task.Id, Task.DONE);
+            bool actual = repository.GetTask(task.Id).IsDone;
 
             Assert.Equal(expected, actual);
         }
