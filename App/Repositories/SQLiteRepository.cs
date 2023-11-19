@@ -78,9 +78,6 @@ namespace App.Repositories
 
         public void UpdateTaskStatus(long taskId, bool newStatus)
         {
-            if (GetTask(taskId).IsDone == newStatus)
-                throw new ArgumentException($"An attempt to change the status of a task to the one it had before. task_id = {taskId}, status = {newStatus}");
-
             ExecuteSQLiteQuery($"UPDATE tasks SET is_done = '{(newStatus ? 1 : 0)}' WHERE task_id = {taskId};");
         }
 
