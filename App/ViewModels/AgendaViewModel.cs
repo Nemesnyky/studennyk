@@ -1,7 +1,7 @@
 using System.Collections.ObjectModel;
-using App.Models;
 using CommunityToolkit.Mvvm.Input;
 using Task = App.Models.Task;
+using ThreadTask = System.Threading.Tasks.Task;
 
 namespace App.ViewModels
 {
@@ -28,12 +28,12 @@ namespace App.ViewModels
             taskListVM = new TaskListViewModel();
             tasks = new List<Task>();
             TaskGroups = new ObservableCollection<TaskGroup>();
-            System.Threading.Tasks.Task.Run(async () => { await LoadTasks(); });
+            ThreadTask.Run(async () => { await LoadTasks(); });
         }
 
-        private async System.Threading.Tasks.Task LoadTasks()
+        private async ThreadTask LoadTasks()
         {
-            var taskList = await System.Threading.Tasks.Task.Run(() => this.taskListVM.GetTaskList());
+            var taskList = await ThreadTask.Run(() => taskListVM.GetTaskList());
 
             var dates = new List<DateTimeOffset>();
 
@@ -55,10 +55,10 @@ namespace App.ViewModels
             }
         }
 
-        public async System.Threading.Tasks.Task DeleteTask(int taskId)
+        public async ThreadTask DeleteTask(int taskId)
         {
             tasks.Remove(tasks.Single(t => t.Id == taskId));
-            await System.Threading.Tasks.Task.Run(() => taskListVM.DeleteTask(taskId));
+            await ThreadTask.Run(() => taskListVM.DeleteTask(taskId));
         }
 
 
@@ -78,7 +78,7 @@ namespace App.ViewModels
                 TaskGroups.Remove(taskGroup);
             }
 
-            System.Threading.Tasks.Task.Run(() => taskListVM.CompleteTask(taskId));
+            ThreadTask.Run(() => taskListVM.CompleteTask(taskId));
         }
 
         [RelayCommand]

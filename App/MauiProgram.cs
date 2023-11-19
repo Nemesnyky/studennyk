@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using App.Repositories;
+using Microsoft.Extensions.Logging;
 
 namespace App
 {
@@ -15,7 +16,7 @@ namespace App
                     fonts.AddFont("LibreFranklin-Bold.ttf", "LibreFranklinBold");
                     fonts.AddFont("LibreFranklin-SemiBold.ttf", "LibreFranklinSemiBold");
                 });
-
+            builder.Services.AddSingleton<IRepository>(Temporary.Initializators.InitializeInMemoryDataBase(new SQLiteRepository()));
 #if DEBUG
             builder.Logging.AddDebug();
 #endif
