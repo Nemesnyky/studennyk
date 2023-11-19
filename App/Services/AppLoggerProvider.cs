@@ -6,11 +6,14 @@ namespace App.Services
     public static class AppLoggerProvider
     {
         public static ILoggerFactory LoggerFactory { get; } =
-            Microsoft.Extensions.Logging.LoggerFactory.Create(builder =>
-        {
-            builder.AddTraceLogger(_ => { });
-        });
-
+            Microsoft.Extensions.Logging.LoggerFactory.Create(builder
+                =>
+#if DEBUG
+        builder.AddTraceLogger(_ => { }));
+#else
+        builder.AddStreamingFileLogger(options =>
+        options.FolderPath = ""/*PATH*/));
+#endif
         public static ILogger CreateLogger<T>() =>
             LoggerFactory.CreateLogger<T>();
     }
