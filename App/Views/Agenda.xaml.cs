@@ -15,5 +15,13 @@ public partial class Agenda : ContentView
         BindingContext = new AgendaViewModel();
     }
 
+    void OnTapGestureRecognizerTapped(object sender, TappedEventArgs args)
+    {
+        // Handle the tap
+        if (args.Buttons == ButtonsMask.Secondary)
+        {
+            Navigation.PushModalAsync(new FlayoutPageWithTask());
+        }
+    }
 
 }

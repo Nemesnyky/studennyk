@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<FlyoutPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:App"
+             x:Class="App.FlayoutPageWithTask"
+             Title="FlayoutPageWithTask"
+            FlyoutLayoutBehavior="Split">
+    <FlyoutPage.Flyout>
+        <ContentPage>
+            <StackLayout>
+                <Label>
+                    Text = "New Task"
+                    TextColor="Blue"
+                    FontFamily="LibreFranklinBold"
+                    FontSize ="29"
+                </Label>
+                <Line Stroke="LightBlue" 
+                      X2="200" />
+                <Label>
+                    Text="Title"
+                    TextColor = "Black"
+                    FontFamily="LibreFranklinBold"
+                    FontSize = "29"
+                </Label>
+                <Label>
+                    // Text = "{Binding Title}"
+                </Label>
+                <Label>
+                    //Text="{Binding Date}"
+                    TextColor = "Black"
+                   FontFamily="LibreFranklinBold"
+                    FontSize = "29"
+                </Label>
+
+                <TimePicker Time="4:15:26" />
+
+                <Label>
+                    Text = "Description"
+                    TextColor = "Black"
+                </Label>
+                <Label>
+                    BackgroundColor = "LightGrey"
+                </Label>
+            </StackLayout>
+        </ContentPage>
+    </FlyoutPage.Flyout>
+    <FlyoutPage.Detail>
+       
+    </FlyoutPage.Detail>
+</FlyoutPage>

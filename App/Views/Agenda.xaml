@@ -36,6 +36,9 @@
                                TextColor="{StaticResource Accent}" Opacity="0.7" VerticalTextAlignment="Center"
                                HorizontalTextAlignment="Start" WidthRequest="100" FontSize="16" HeightRequest="49"
                                Text="{Binding Date, StringFormat='{0:HH}:00'}">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnTapGestureRecognizerTapped"  Buttons="Secondary" />
+                            </Label.GestureRecognizers>
                         </Label>
                     </DataTemplate>
                 </CollectionView.GroupHeaderTemplate>
