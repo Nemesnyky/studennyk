@@ -1,5 +1,7 @@
 using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.Input;
+using App.Repositories;
+using App.Services;
 using Task = App.Models.Task;
 using ThreadTask = System.Threading.Tasks.Task;
 
@@ -17,55 +19,59 @@ namespace App.ViewModels
 
     public partial class AgendaViewModel
     {
-        private TaskListViewModel taskListVM;
         private Task dragged;
-
-        private List<Task> tasks;
-        public ObservableCollection<TaskGroup> TaskGroups { get; set; }
+        private readonly IRepository repository;
+        private readonly List<Task> allTasks = new();
+        public ObservableCollection<TaskGroup> TaskGroups { get; set; } = new();
 
         public AgendaViewModel()
         {
-            taskListVM = new TaskListViewModel();
-            tasks = new List<Task>();
-            TaskGroups = new ObservableCollection<TaskGroup>();
-            ThreadTask.Run(async () => { await LoadTasks(); });
+            repository = AppServiceProvider.GetService<IRepository>();
+
+            ThreadTask.Run(LoadTasks);
         }
 
         private async ThreadTask LoadTasks()
         {
-            var taskList = await ThreadTask.Run(() => taskListVM.GetTaskList());
 
-            var dates = new List<DateTimeOffset>();
-
-            tasks.Clear();
             TaskGroups.Clear();
-            foreach (var task in taskList.Where(t => t.IsDone != true))
+            allTasks.Clear();
+            allTasks.AddRange(await ThreadTask.Run(repository.GetTasks));
+
+            List<DateTimeOffset> dates = new();
+            List<Task> notDoneTasks = new();
+
+            foreach (var task in allTasks.Where(t => t.IsDone == Task.NOT_DONE))
             {
-                tasks.Add(task);
+                notDoneTasks.Add(task);
                 if (dates.All(t => t.Hour != task.Due.Hour))
                 {
+                    //TODO : ñonsider days, not just hours
                     dates.Add(task.Due);
                 }
             }
 
             foreach (var date in dates.OrderBy(t => t.Hour))
             {
-                TaskGroups.Add(new TaskGroup(date,
-                    taskList.Where(t => t.Due.Hour == date.Hour && t.IsDone != true)));
+                //TODO : consider days, not just hours
+                TaskGroups.Add(new TaskGroup(
+                    date,
+                    notDoneTasks.Where(t => t.Due.Hour == date.Hour))
+                    );
             }
         }
 
         public async ThreadTask DeleteTask(int taskId)
         {
-            tasks.Remove(tasks.Single(t => t.Id == taskId));
-            await ThreadTask.Run(() => taskListVM.DeleteTask(taskId));
+            allTasks.Remove(allTasks.Single(t => t.Id == taskId));
+            //TODO : delete task from TaskGroups
+            await ThreadTask.Run(() => repository.DeleteTask(taskId));
         }
 
-
-        private void CompleteTask(long taskId)
+        private async ThreadTask CompleteTask(long taskId)
         {
-            var task = tasks.First(t => t.Id == taskId);
-            task.IsDone = true;
+            Task task = allTasks.First(t => t.Id == taskId);
+            task.IsDone = Task.DONE;
 
             var taskGroup = TaskGroups.First(t => t.Date.Hour == task.Due.Hour);
 
@@ -78,7 +84,7 @@ namespace App.ViewModels
                 TaskGroups.Remove(taskGroup);
             }
 
-            ThreadTask.Run(() => taskListVM.CompleteTask(taskId));
+            await ThreadTask.Run(() => repository.UpdateTaskStatus(taskId, Task.DONE));
         }
 
         [RelayCommand]
@@ -90,7 +96,7 @@ namespace App.ViewModels
         [RelayCommand]
         private void TaskDropped()
         {
-            CompleteTask(dragged.Id);
+            _ = CompleteTask(dragged.Id);
             dragged = null;
         }
     }
