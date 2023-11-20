@@ -2,6 +2,7 @@
 <FlyoutPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:App"
+             xmlns:views="clr-namespace:App.Views"
              x:Class="App.FlayoutPageWithTask"
              Title="FlayoutPageWithTask"
             FlyoutLayoutBehavior="Split">
@@ -14,7 +15,7 @@
                     FontFamily="LibreFranklinBold"
                     FontSize ="29"
                 </Label>
-                <Line Stroke="LightBlue" 
+                <Line Stroke="LightBlue"
                       X2="200" />
                 <Label>
                     Text="Title"
@@ -45,6 +46,5 @@
         </ContentPage>
     </FlyoutPage.Flyout>
     <FlyoutPage.Detail>
-       
     </FlyoutPage.Detail>
 </FlyoutPage>
