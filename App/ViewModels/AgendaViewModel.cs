@@ -3,7 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using App.Repositories;
 using App.Services;
 using Task = App.Models.Task;
-//using ThreadTask = System.Threading.Tasks.Task;
+using ThreadTask = System.Threading.Tasks.Task;
 
 namespace App.ViewModels
 {
@@ -28,14 +28,15 @@ namespace App.ViewModels
         {
             repository = AppServiceProvider.GetService<IRepository>();
 
-            LoadTasks();
+            ThreadTask.Run(LoadTasks);
         }
 
-        private void LoadTasks()
+        private async ThreadTask LoadTasks()
         {
+
             TaskGroups.Clear();
             allTasks.Clear();
-            allTasks.AddRange(repository.GetTasks());
+            allTasks.AddRange(await ThreadTask.Run(repository.GetTasks));
 
             List<DateTimeOffset> dates = new();
             List<Task> notDoneTasks = new();
@@ -60,14 +61,14 @@ namespace App.ViewModels
             }
         }
 
-        public void DeleteTask(int taskId)
+        public async ThreadTask DeleteTask(int taskId)
         {
             allTasks.Remove(allTasks.Single(t => t.Id == taskId));
             //TODO : delete task from TaskGroups
-            repository.DeleteTask(taskId);
+            await ThreadTask.Run(() => repository.DeleteTask(taskId));
         }
 
-        private void CompleteTask(long taskId)
+        private async ThreadTask CompleteTask(long taskId)
         {
             Task task = allTasks.First(t => t.Id == taskId);
             task.IsDone = Task.DONE;
@@ -83,7 +84,7 @@ namespace App.ViewModels
                 TaskGroups.Remove(taskGroup);
             }
 
-            repository.UpdateTaskStatus(taskId, Task.DONE);
+            await ThreadTask.Run(() => repository.UpdateTaskStatus(taskId, Task.DONE));
         }
 
         [RelayCommand]
@@ -95,7 +96,7 @@ namespace App.ViewModels
         [RelayCommand]
         private void TaskDropped()
         {
-            CompleteTask(dragged.Id);
+            _ = CompleteTask(dragged.Id);
             dragged = null;
         }
     }
