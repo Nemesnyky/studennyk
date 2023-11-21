@@ -14,7 +14,7 @@
                     FontFamily="LibreFranklinBold"
                     FontSize ="29"
                 </Label>
-                <Line Stroke="LightBlue" 
+                <Line Stroke="LightBlue"
                       X2="200" />
                 <Label>
                     Text="Title"

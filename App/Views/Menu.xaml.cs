@@ -4,15 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using App.ViewModels;
-using CommunityToolkit.Mvvm.Messaging;
 
 namespace App.Views;
 
-public partial class Agenda : ContentView
+public partial class Menu : ContentView
 {
-    public Agenda()
+    public Menu()
     {
         InitializeComponent();
-        BindingContext = new AgendaViewModel();
+        BindingContext = new MenuViewModel();
     }
 }
