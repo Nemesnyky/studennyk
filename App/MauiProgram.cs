@@ -17,9 +17,6 @@ namespace App
                     fonts.AddFont("LibreFranklin-SemiBold.ttf", "LibreFranklinSemiBold");
                 });
             builder.Services.AddSingleton<IRepository>(Temporary.Initializators.InitializeInMemoryDataBase(new SQLiteRepository()));
-#if DEBUG
-            builder.Logging.AddDebug();
-#endif
 
             return builder.Build();
         }
