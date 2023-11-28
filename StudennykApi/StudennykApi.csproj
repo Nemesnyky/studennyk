@@ -8,9 +8,10 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.0"/>
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.0" />
         <PackageReference Include="RendleLabs.OpenApi.Web" Version="0.1.4-beta" />
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+        <PackageReference Include="Microsoft.Data.Sqlite" Version="8.0.0" />
     </ItemGroup>
 
     <ItemGroup>

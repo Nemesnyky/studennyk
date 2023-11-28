@@ -1,6 +1,6 @@
-﻿using Task = App.Models.Task;
+﻿using Task = StudennykApi.Models.Task;
 
-namespace App.Repositories
+namespace StudennykApi.Repositories
 {
     public interface IRepository
     {

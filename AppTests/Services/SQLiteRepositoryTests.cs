@@ -1,24 +1,27 @@
-﻿using App.Repositories;
-using App.Temporary;
+﻿using App.Temporary;
+using App.Services;
 using Task = App.Models.Task;
 
 namespace AppTests.Services
 {
     public class SQLiteRepositoryTests : IDisposable
     {
-        private readonly SQLiteRepository repository;
+        private readonly RestService client;
         private readonly Task task;
 
         public SQLiteRepositoryTests()
         {
-            repository = new SQLiteRepository("Data Source=:memory:");
-            task = Generators.GenerateRandomTask();
-            task.Id = repository.AddTask(task);
+            client = new RestService();
+            System.Threading.Tasks.Task.Run(async () =>
+            {
+                await client.RefreshDataAsync();
+                task = Generators.GenerateRandomTask();
+                task.Id = await client.AddTask(task);
+            });
         }
 
         public void Dispose()
         {
-            repository.Dispose();
             GC.SuppressFinalize(this);
         }
 
@@ -37,8 +40,8 @@ namespace AppTests.Services
         {
             Task? expected = null;
 
-            repository.DeleteTask(task.Id);
-            Task actual = repository.GetTask(task.Id);
+            client.DeleteTask(task.Id);
+            Task actual = client.GetTask(task.Id);
 
             Assert.Equal(expected, actual);
         }

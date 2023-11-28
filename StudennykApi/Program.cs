@@ -1,16 +1,18 @@
 using RendleLabs.OpenApi.Web;
 using System.Reflection;
+using StudennykApi.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddControllers();
+builder.Services.AddSingleton<SQLiteRepository>(new SQLiteRepository());
 
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    app.UseStaticOpenApi(Assembly.GetExecutingAssembly(), "StudennykApi.openapi.yaml",
+    app.UseStaticOpenApi(Assembly.GetExecutingAssembly(), "StudennykAPI.openapi.yaml",
                 new StaticOpenApiOptions
                 {
                     Version = 1,

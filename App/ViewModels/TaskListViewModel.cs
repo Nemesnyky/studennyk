@@ -1,47 +1,45 @@
-using App.Repositories;
 using App.Services;
 using System.Collections.ObjectModel;
-using Task = App.Models.Task;
 
 namespace App.ViewModels
 {
 
     public class TaskListViewModel
     {
-        private readonly IRepository repository;
-        public ObservableCollection<Task> Tasks { get; set; } = new();
+        private readonly RestService client;
+        private List<Models.Task> tasks;
 
         public TaskListViewModel()
         {
-            repository = AppServiceProvider.GetService<IRepository>();
-            LoadTasks();
-        }
-
-        public void LoadTasks()
-        {
-            Tasks.Clear();
-            foreach (Task task in repository.GetTasks())
+            client = AppServiceProvider.GetService<RestService>();
+            Task.Run(async () =>
             {
-                Tasks.Add(task);
-            }
+                await Task.Delay(100);
+                await LoadTasks();
+            });
         }
 
-        public List<Task> GetTaskList()
+        public List<Models.Task> GetTaskList()
         {
-            return Tasks.ToList();
+            return tasks;
         }
 
-        public void DeleteTask(long taskId)
+        public async Task LoadTasks()
         {
-            repository.DeleteTask(taskId);
-            Tasks.Remove(Tasks.Single(t => t.Id == taskId));
+            tasks = await client.RefreshDataAsync();
         }
 
-        public void CompleteTask(long taskId)
+        public async Task DeleteTask(long taskId)
         {
-            repository.UpdateTaskStatus(taskId, Task.DONE);
-            int i = Tasks.IndexOf(Tasks.Single(t => t.Id == taskId));
-            Tasks[i].IsDone = true;
+            await client.DeleteTask(taskId);
+            tasks.Remove(tasks.Single(t => t.Id == taskId));
+        }
+
+        public async Task CompleteTask(long taskId)
+        {
+            await client.UpdateTask<bool>(taskId, Models.Task.DONE);
+            int i = tasks.IndexOf(tasks.Single(t => t.Id == taskId));
+            tasks[i].IsDone = true;
         }
     }
 

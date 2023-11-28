@@ -1,17 +1,15 @@
-﻿using App.Repositories;
+﻿using App.Services;
 
 namespace App.Temporary
 {
     public static class Initializators
     {
         private static readonly Random random = new();
-        public static IRepository InitializeInMemoryDataBase(IRepository repository)
+        public static RestService InitializeInMemoryDataBase(RestService client)
         {
-            int numTasks = random.Next(5, 12);
-            for (int i = 0; i < numTasks; i++)
-                repository.AddTask(Temporary.Generators.GenerateRandomTask());
+            Task.Run(async () => { await client.AddTask(Temporary.Generators.GenerateRandomTask()); await Task.Delay(100); });
 
-            return repository;
+            return client;
         }
     }
 }

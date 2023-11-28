@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using StudennykApi.Models;
+using StudennykApi.Repositories;
 
 using Task = StudennykApi.Models.Task;
 
@@ -9,30 +10,34 @@ namespace StudennykApi.Controllers
     [Route("api/v1/[controller]")]
     public class TasksController : ControllerBase
     {
-        private static List<Task> tasks = new List<Task>
+        private readonly SQLiteRepository _repository;
+        private List<Task> _tasks;
+        public TasksController(SQLiteRepository sqliteRepository)
         {
-            new Task { Id = 1, Title = "Task 1", Description = "Description for Task 1", Created = DateTime.UtcNow, Due = DateTime.UtcNow.AddDays(1), IsDone = false },
-            new Task { Id = 2, Title = "Task 2", Description = "Description for Task 2", Created = DateTime.UtcNow, Due = DateTime.UtcNow.AddDays(2), IsDone = false }
-        };
+            _repository = sqliteRepository;
+            _tasks = sqliteRepository.GetTasks().ToList();
+        }
 
         [HttpGet]
         public IActionResult GetTasks()
         {
-            return Ok(tasks);
+            return Ok(_tasks);
         }
 
         [HttpPost]
         public IActionResult CreateTask([FromBody] Task task)
         {
-            task.Id = tasks.Count + 1;
-            tasks.Add(task);
+            task.Id = _repository.AddTask(task);
+            _tasks.Add(task);
+
             return CreatedAtAction(nameof(GetTaskById), new { task_id = task.Id }, task.Id);
         }
 
         [HttpGet("{task_id}")]
         public IActionResult GetTaskById(int task_id)
         {
-            var task = tasks.Find(t => t.Id == task_id);
+
+            var task = _tasks.Find(t => t.Id == task_id);
             if (task == null)
             {
                 return NotFound();
@@ -43,19 +48,35 @@ namespace StudennykApi.Controllers
         [HttpPut("{task_id}")]
         public IActionResult UpdateTask(int task_id, [FromBody] UpdateTask updatedTask)
         {
-            var task = tasks.Find(t => t.Id == task_id);
+            var task = _tasks.Find(t => t.Id == task_id);
             if (task == null)
             {
                 return NotFound();
             }
 
             // Update only specified fields
-            task.Title = updatedTask.Title ?? task.Title;
-            task.Description = updatedTask.Description ?? task.Description;
-            var due = updatedTask.Due.Equals(task.Due) ? task.Due : updatedTask.Due;
-            task.Due = due ?? task.Due;
-            var isDone = updatedTask.IsDone.Equals(task.IsDone) ? task.IsDone : updatedTask.IsDone;
-            task.IsDone = isDone ?? task.IsDone;
+            if (updatedTask.Title is not null && !updatedTask.Title!.Equals(task.Title))
+            {
+                task.Title = updatedTask.Title;
+                _repository.UpdateTaskTitle(task.Id, updatedTask.Title);
+            }
+            if (updatedTask.Description is not null && !updatedTask.Description!.Equals(task.Description))
+            {
+                task.Description = updatedTask.Description;
+                _repository.UpdateTaskDescription(task.Id, updatedTask.Description);
+            }
+            if (updatedTask.Due is not null && !updatedTask.Due!.Equals(task.Due))
+            {
+                var due = updatedTask.Due ?? task.Due;
+                task.Due = due;
+                _repository.UpdateTaskDueTime(task.Id, due);
+            }
+            if (updatedTask.IsDone is not null && !updatedTask.IsDone!.Equals(task.IsDone))
+            {
+                var is_done = updatedTask.IsDone ?? task.IsDone;
+                task.IsDone = is_done;
+                _repository.UpdateTaskStatus(task.Id, is_done);
+            }
 
             return NoContent();
         }
@@ -63,13 +84,15 @@ namespace StudennykApi.Controllers
         [HttpDelete("{task_id}")]
         public IActionResult DeleteTask(int task_id)
         {
-            var task = tasks.Find(t => t.Id == task_id);
+            var task = _tasks.Find(t => t.Id == task_id);
+
             if (task == null)
             {
                 return NotFound();
             }
 
-            tasks.Remove(task);
+            _tasks.Remove(task);
+            _repository.DeleteTask(task.Id);
             return NoContent();
         }
     }
