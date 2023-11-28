@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:viewModels="clr-namespace:App.ViewModels"
+             xmlns:local="clr-namespace:App"
+              x:DataType="viewModels:TaskDescriprionViewModel"
+             x:Class="App.Views.TaskDescription">
+    <StackLayout>
+        <Label
+        Text = "{Binding Task.Title}"
+        TextColor="Blue"
+        FontFamily="LibreFranklinBold"
+        FontSize ="29">
+        </Label>
+            <Label
+            Text="{Binding Task.Due}"
+            TextColor = "Black"
+            FontFamily="LibreFranklinBold"
+            FontSize = "29">
+            </Label>
+       
+        <Line Stroke="LightBlue"
+          X2="200" 
+              Margin="5,0,5,0"/>
+                <Label
+            BackgroundColor = "LightGrey"
+            Text ="{Binding Task.Description}">
+                </Label>
+    </StackLayout>
+</ContentView>

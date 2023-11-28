@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using App.ViewModels;
 using CommunityToolkit.Mvvm.Messaging;
 
+
 namespace App.Views;
 
 public partial class Agenda : ContentView
@@ -15,4 +16,5 @@ public partial class Agenda : ContentView
         InitializeComponent();
         BindingContext = new AgendaViewModel();
     }
+    
 }
