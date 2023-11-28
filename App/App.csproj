@@ -60,9 +60,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Views\FlyoutPageWithTask.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="Views\TaskDescription.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

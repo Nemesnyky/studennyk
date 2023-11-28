@@ -21,7 +21,7 @@ namespace App.Views
             WeakReferenceMessenger.Default.Register<ShowDescriptionMessage>(this, (r, m) =>
             {
                 if (showDescription) { return; }
-                grid.AddColumnDefinition(new ColumnDefinition() { Width = new GridLength(0.1, GridUnitType.Star) });
+                grid.AddColumnDefinition(new ColumnDefinition() { Width = new GridLength(0.25, GridUnitType.Star) });
                 grid.Add(new TaskDescription(m.Value) , grid.ColumnDefinitions.Count - 1 , 0);
                 showDescription = true; 
             });

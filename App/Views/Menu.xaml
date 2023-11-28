@@ -5,9 +5,9 @@
              xmlns:viewModels="clr-namespace:App.ViewModels"
              xmlns:local="clr-namespace:App"
              x:Class="App.Views.Menu">
-    <FlexLayout Direction="Row" x:Name="hi">
-    <Frame CornerRadius="15" BackgroundColor="{StaticResource Gray30}" VerticalOptions="Fill" HorizontalOptions="Fill">
-            <Button Command="{Binding HideMenuCommand}" Text="Hide Menu"></Button>
+    <FlexLayout Direction="Row" >
+        <Frame Margin="20" CornerRadius="15" BackgroundColor="{StaticResource Gray30}" VerticalOptions="Fill" HorizontalOptions="Fill">
+            <Button Command="{Binding HideMenuCommand}" Text="Hide Menu" BackgroundColor="Red"></Button>
         </Frame>
         </FlexLayout>
 </ContentView>
