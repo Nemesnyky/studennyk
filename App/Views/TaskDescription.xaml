@@ -5,56 +5,26 @@
              xmlns:local="clr-namespace:App"
               x:DataType="viewModels:TaskDescriprionViewModel"
              x:Class="App.Views.TaskDescription">
-    <StackLayout x:Name="description">
-        <Label>
-        Text = "{Binding title}"
+    <StackLayout>
+        <Label
+        Text = "{Binding Task.Title}"
         TextColor="Blue"
         FontFamily="LibreFranklinBold"
-        FontSize ="29"
+        FontSize ="29">
         </Label>
-        <Label>
-            Text="{Binding due}"
+            <Label
+            Text="{Binding Task.Due}"
             TextColor = "Black"
             FontFamily="LibreFranklinBold"
-            FontSize = "29"
-        </Label>
-        <FlexLayout
-
-                    Margin="5,-10,5,5"
-                    AlignContent="Start"
-                    AlignItems="Start"
-                    HorizontalOptions="FillAndExpand"
-                    VerticalOptions="Fill"
-                    Direction="Row"
-                    JustifyContent="Start"
-                    BindableLayout.ItemsSource="{Binding Tags}"
-                    Wrap="Wrap" >
-            <BindableLayout.ItemTemplate>
-                <DataTemplate>
-                    <Frame
-                                Margin="2"
-                                Padding="4"
-                                CornerRadius="15">
-                        <StackLayout
-                                        Margin="5,0,5,0"
-                                        Orientation="Horizontal">
-                            <Label
-                                                x:Name="TagLabel"
-                                                FontSize="18"
-                                                Text="{Binding .}"
-                                                Margin="5,0,5,0"
-                                                VerticalOptions="Center" />
-                        </StackLayout>
-                    </Frame>
-                </DataTemplate>
-            </BindableLayout.ItemTemplate>
-        </FlexLayout>
+            FontSize = "29">
+            </Label>
+       
         <Line Stroke="LightBlue"
           X2="200" 
               Margin="5,0,5,0"/>
-        <Label>
+                <Label
             BackgroundColor = "LightGrey"
-            Text ="{Binding description}"
-        </Label>
+            Text ="{Binding Task.Description}">
+                </Label>
     </StackLayout>
 </ContentView>

@@ -1,6 +1,7 @@
 using System.Collections.ObjectModel;
 using App.Models;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using Task = App.Models.Task;
 
 namespace App.ViewModels
@@ -93,5 +94,11 @@ namespace App.ViewModels
             CompleteTask(dragged.Id);
             dragged = null;
         }
+        [RelayCommand]
+        public void ShowDescription(Task task)
+        {
+            WeakReferenceMessenger.Default.Send(new ShowDescriptionMessage(task));
+        }
+
     }
 }

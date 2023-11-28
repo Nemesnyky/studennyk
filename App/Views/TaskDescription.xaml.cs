@@ -9,9 +9,9 @@ namespace App.Views;
 
 public partial class TaskDescription : ContentView
 {
-	public TaskDescription()
+	public TaskDescription(Models.Task task)
 	{
 		InitializeComponent();
-        BindingContext = new TaskDescriprionViewModel();
+        BindingContext = new TaskDescriprionViewModel(task);
     }
 }

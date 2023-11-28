@@ -16,12 +16,5 @@ public partial class Agenda : ContentView
         InitializeComponent();
         BindingContext = new AgendaViewModel();
     }
-    void OnTapGestureRecognizerTapped(object sender, TappedEventArgs args)
-    {
-        // Handle the tap
-        if (args.Buttons == ButtonsMask.Secondary)
-        {
-           ShowDescription(taskId);
-        }
-    }
+    
 }
