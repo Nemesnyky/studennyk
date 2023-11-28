@@ -3,9 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:views="clr-namespace:App.Views"
              x:Class="App.Views.MainPage">
-    <FlexLayout Direction="Row" x:Name="layout">
+    <FlexLayout Direction="Row" x:Name="layout" JustifyContent="Center">
         <views:Menu/>
-        <views:Agenda />
+        <views:Agenda/>
+     
     </FlexLayout>
 
 

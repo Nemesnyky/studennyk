@@ -46,9 +46,7 @@
     </FlyoutPage.Flyout>
     <FlyoutPage.Detail>
         
-            <x:Arguments>
-                <views:Agenda />
-            </x:Arguments>
         
+         
     </FlyoutPage.Detail>
 </FlyoutPage>

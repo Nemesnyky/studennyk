@@ -54,7 +54,16 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Views\TaskDescription.xaml.cs">
+	    <DependentUpon>TaskDescription.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
 	  <MauiXaml Update="Views\FlyoutPageWithTask.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\TaskDescription.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
