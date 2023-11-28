@@ -6,6 +6,7 @@
     <FlexLayout Direction="Row" x:Name="layout">
         <views:Menu/>
         <views:Agenda />
+        <views:NewContent1/>
     </FlexLayout>
 
 
