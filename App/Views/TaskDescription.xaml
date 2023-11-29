@@ -22,7 +22,6 @@
                     FontFamily="Inter"
                     FontAttributes="Bold"
                     FontSize ="21"
-                    HorizontalOptions="Center"/>
 
 
                 <Label
