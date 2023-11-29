@@ -14,11 +14,11 @@
             VerticalOptions="Fill" HorizontalOptions="Fill"
             BackgroundColor="{StaticResource Gray30}">
             <StackLayout
-                 Spacing="25">
+               Spacing="25">
 
                 <Label
                     Text = "{Binding Task.Title}"
-                    TextColor="#0D69C5"
+                    TextColor="{StaticResource Accent}"
                     FontFamily="Inter"
                     FontAttributes="Bold"
                     FontSize ="21"
@@ -27,7 +27,7 @@
 
                 <Label
                     Text="{Binding Task.Due}"
-                    TextColor = "#EB5757"
+                    TextColor = "{StaticResource SoftRed}"
                     FontFamily="Inter"
                     FontAttributes="Bold"
                     FontSize = "18"
@@ -35,7 +35,7 @@
                     HorizontalOptions="Center"/>
 
                 <Line 
-                    Stroke="LightBlue"
+                    Stroke= "{StaticResource BlueLight}"
                     X2="200" 
                     HorizontalOptions="Center"
                     Margin="5,0,5,0"/>

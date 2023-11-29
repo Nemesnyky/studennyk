@@ -32,5 +32,7 @@
     <Color x:Key="Blue200Accent">#72ACF1</Color>
     <Color x:Key="Blue300Accent">#A7CBF6</Color>
     <Color x:Key="CustomColor">#E54C5B3B</Color>
+    <Color x:Key="BlueLight">#DCF6F6</Color>
+    <Color x:Key="SoftRed">#EB5757</Color>
 
 </ResourceDictionary>
