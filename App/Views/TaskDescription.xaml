@@ -40,11 +40,8 @@
                     HorizontalOptions="Center"
                     Margin="5,0,5,0"/>
                 <Label
-                    Text ="{Binding Task.Description}"
-                    FontFamily="LibreFranklin"
-                    FontSize="15"/>
-            </StackLayout>
-        </Frame>
-    </FlexLayout>
-    
+            BackgroundColor = "LightGrey"
+            Text ="{Binding Task.Description}">
+                </Label>
+    </StackLayout>
 </ContentView>
