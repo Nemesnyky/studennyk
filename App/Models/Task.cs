@@ -26,4 +26,20 @@ public class Task
         Due = due;
         IsDone = isDone;
     }
+
+    public override bool Equals(object obj)
+    {
+        return obj is Task task &&
+               Id == task.Id &&
+               Title == task.Title &&
+               Description == task.Description &&
+               Created.Equals(task.Created) &&
+               Due.Equals(task.Due) &&
+               IsDone == task.IsDone;
+    }
+
+    public override int GetHashCode()
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -10,10 +10,12 @@ namespace StudennykApi.Controllers
     [Route("api/v1/[controller]")]
     public class TasksController : ControllerBase
     {
+        private ILogger<TasksController> _logger;
         private readonly SQLiteRepository _repository;
         private List<Task> _tasks;
-        public TasksController(SQLiteRepository sqliteRepository)
+        public TasksController(ILogger<TasksController> logger, SQLiteRepository sqliteRepository)
         {
+            _logger = logger;
             _repository = sqliteRepository;
             _tasks = sqliteRepository.GetTasks().ToList();
         }
@@ -48,6 +50,8 @@ namespace StudennykApi.Controllers
         [HttpPut("{task_id}")]
         public IActionResult UpdateTask(int task_id, [FromBody] UpdateTask updatedTask)
         {
+            _logger.LogInformation($"{updatedTask.Title}");
+
             var task = _tasks.Find(t => t.Id == task_id);
             if (task == null)
             {

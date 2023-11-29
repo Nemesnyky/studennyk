@@ -37,7 +37,7 @@ namespace App.ViewModels
 
         public async Task CompleteTask(long taskId)
         {
-            await client.UpdateTask<bool>(taskId, Models.Task.DONE);
+            await client.UpdateTaskStatus(taskId, Models.Task.DONE);
             int i = tasks.IndexOf(tasks.Single(t => t.Id == taskId));
             tasks[i].IsDone = true;
         }
