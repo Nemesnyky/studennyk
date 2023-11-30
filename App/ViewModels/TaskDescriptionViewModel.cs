@@ -13,6 +13,7 @@ public sealed class ShowDescriptionMessage: ValueChangedMessage<Models.Task>
         
     }
 }
+public sealed class HideDescriptionMessage { }
 
 public partial class TaskDescriprionViewModel : ObservableObject
 {
@@ -24,5 +25,10 @@ public partial class TaskDescriprionViewModel : ObservableObject
         WeakReferenceMessenger.Default.Register<ShowDescriptionMessage>(this, (r, m) => { Task = m.Value;  });
         Task = task;
     }
-    
+    [RelayCommand]
+    private void HideDescription()
+    {
+        WeakReferenceMessenger.Default.Send(new HideDescriptionMessage());
+    }
 }
+

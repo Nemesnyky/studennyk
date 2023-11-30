@@ -34,5 +34,6 @@
     <Color x:Key="CustomColor">#E54C5B3B</Color>
     <Color x:Key="BlueLight">#DCF6F6</Color>
     <Color x:Key="SoftRed">#EB5757</Color>
+    <Color x:Key="Orange">#F9983A</Color>
 
 </ResourceDictionary>
