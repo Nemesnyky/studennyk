@@ -37,12 +37,13 @@
                 HorizontalOptions="Start"/>
                 <Frame
                     Background="{StaticResource TextDark}"
-                    CornerRadius="25">
+                    CornerRadius="25"
+                    HorizontalOptions="FillAndExpand"
+                   HeightRequest="70">
                     <Entry
                     TextColor="Black" 
-                    WidthRequest="240"
-                    HeightRequest="38"
-                    HorizontalOptions="Center"/>
+                    HorizontalOptions="FillAndExpand"
+                        VerticalOptions="Center"/>
                 </Frame>
 
                 <Label
@@ -52,26 +53,28 @@
                     FontSize = "20"
                     HeightRequest="22"
                     HorizontalOptions="Start"/>
-                <Grid ColumnSpacing="20">
+                <Grid ColumnSpacing="10">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <Frame Background="{StaticResource TextDark}"
-                           CornerRadius="15">
+                    <Frame Grid.Column="0" Background="{StaticResource TextDark}"
+                           CornerRadius="25"
+                           HorizontalOptions="FillAndExpand"
+                           HeightRequest="70">
                         <TimePicker
-                            WidthRequest="78"
-                            HeightRequest="38"
-                            HorizontalOptions="Center"/>
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand"/>
                        
                     </Frame>
-                    <Frame Grid.Row="1"
+                    <Frame Grid.Column="1"
                            Background="{StaticResource TextDark}"
-                           CornerRadius="15">
+                            CornerRadius="25"
+                            HorizontalOptions="FillAndExpand"
+                           HeightRequest="70">
                         <TimePicker
-                           WidthRequest="78"
-                           HeightRequest="38"
-                           HorizontalOptions="Center"/>
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand"/>
                         
                     </Frame>
                 </Grid>
@@ -84,11 +87,12 @@
                    HorizontalOptions="Start"/>
                 <Frame
                     Background="{StaticResource TextDark}"
-                    CornerRadius="15">
+                     CornerRadius="25"
+                     HorizontalOptions="FillAndExpand"
+                     HeightRequest="70">
                     <Entry
-                         WidthRequest="240"
-                         HeightRequest="38"
-                         HorizontalOptions="Center"/>
+                         VerticalOptions="FillAndExpand"
+                         HorizontalOptions="FillAndExpand"/>
                 </Frame>
 
 
@@ -97,7 +101,7 @@
                 BackgroundColor="Transparent"
                 >
 
-                    <Polyline Points="0 13, 13 0, 30 30"
+                    <Polyline Points="30 15, 12 40, 0 30"
                            Stroke="{StaticResource Orange}"
                            StrokeThickness="7"
                           StrokeLineJoin="Round" 
