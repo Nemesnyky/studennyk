@@ -46,6 +46,8 @@
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer  Command="{Binding Source={x:RelativeSource AncestorType={x:Type viewModels:AgendaViewModel}}, Path=ShowDescriptionCommand}" Buttons="Primary"
                                                        CommandParameter="{Binding .}" />
+                                <TapGestureRecognizer  Command="{Binding Source={x:RelativeSource AncestorType={x:Type viewModels:AgendaViewModel}}, Path=CreateTaskCommand}" Buttons="Secondary"
+                                                       CommandParameter="{Binding .}" />
 
                                 <DragGestureRecognizer
                                     DragStartingCommand="{Binding Source={x:RelativeSource AncestorType={x:Type viewModels:AgendaViewModel}}, Path=DragStartedCommand}"

@@ -58,6 +58,14 @@ namespace App.ViewModels
             Tasks.Remove(Tasks.Single(t => t.Id == taskId));
         }
 
+        public long AddTask(Task task)
+        {
+            long id = random.Next(1000, 10000);
+            task.Id = id;
+            Tasks.Add(task);
+            return id;
+        }
+
         public async ThreadTask CompleteTask(long taskId)
         {
             await ThreadTask.Delay(10);

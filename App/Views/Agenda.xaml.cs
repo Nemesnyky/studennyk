@@ -14,7 +14,7 @@ public partial class Agenda : ContentView
     public Agenda()
     {
         InitializeComponent();
-        BindingContext = new AgendaViewModel();
+        BindingContext = App.Current.Handler.MauiContext.Services.GetService<AgendaViewModel>();
     }
-    
+
 }

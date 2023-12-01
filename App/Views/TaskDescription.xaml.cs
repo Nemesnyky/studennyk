@@ -5,13 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using App.ViewModels;
 
-namespace App.Views;
-
-public partial class TaskDescription : ContentView
+namespace App.Views
 {
-	public TaskDescription(Models.Task task)
-	{
-		InitializeComponent();
-        BindingContext = new TaskDescriprionViewModel(task);
+    public partial class TaskDescription : ContentView
+    {
+        public TaskDescription(Models.Task task)
+        {
+            InitializeComponent();
+            BindingContext = new TaskDescriprionViewModel(task);
+        }
     }
+
 }

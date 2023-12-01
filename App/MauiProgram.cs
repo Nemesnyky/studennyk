@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using App.ViewModels;
+using App.Views;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Logging;
 
 namespace App
 {
@@ -19,6 +22,12 @@ namespace App
 #if DEBUG
             builder.Logging.AddDebug();
 #endif
+            builder.Services.AddSingleton<TaskListViewModel>();
+            builder.Services.AddSingleton<AgendaViewModel>();
+            builder.Services.AddSingleton<TaskDescriprionViewModel>();
+            builder.Services.AddSingleton<Agenda>();
+            builder.Services.AddSingleton<TaskDescription>();
+            builder.Services.AddSingleton<MainPage>();
 
             return builder.Build();
         }

@@ -1,5 +1,4 @@
 using System.Collections.ObjectModel;
-using App.Models;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using Task = App.Models.Task;
@@ -24,9 +23,9 @@ namespace App.ViewModels
         private List<Task> tasks;
         public ObservableCollection<TaskGroup> TaskGroups { get; set; }
 
-        public AgendaViewModel()
+        public AgendaViewModel(TaskListViewModel vm)
         {
-            taskListVM = new TaskListViewModel();
+            taskListVM = vm;
             tasks = new List<Task>();
             TaskGroups = new ObservableCollection<TaskGroup>();
             System.Threading.Tasks.Task.Run(async () => { await LoadTasks(); });
@@ -98,6 +97,12 @@ namespace App.ViewModels
         public void ShowDescription(Task task)
         {
             WeakReferenceMessenger.Default.Send(new ShowDescriptionMessage(task));
+        }
+
+        [RelayCommand]
+        public void CreateTask()
+        {
+            WeakReferenceMessenger.Default.Send(new CreateTaskMessage(taskListVM));
         }
     }
 }
