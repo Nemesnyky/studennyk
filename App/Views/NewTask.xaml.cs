@@ -9,10 +9,10 @@ namespace App.Views;
 
 public partial class NewTask : ContentView
 {
-	public NewTask()
-	{
-		InitializeComponent();
-		BindingContext = new NewTaskViewModel();
+    public NewTask()
+    {
+        InitializeComponent();
+        BindingContext = new NewTaskViewModel();
 
     }
 }

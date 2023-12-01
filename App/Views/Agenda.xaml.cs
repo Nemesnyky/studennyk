@@ -16,5 +16,5 @@ public partial class Agenda : ContentView
         InitializeComponent();
         BindingContext = new AgendaViewModel();
     }
-    
+
 }
