@@ -29,6 +29,7 @@ namespace App.Views
             {
                 grid.RemoveAt(2);
                 grid.ColumnDefinitions.RemoveAt(2);
+                showDescription = false;
             });
         }
     }
