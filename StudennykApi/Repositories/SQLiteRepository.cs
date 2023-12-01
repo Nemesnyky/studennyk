@@ -3,20 +3,17 @@ using Task = StudennykApi.Models.Task;
 
 namespace StudennykApi.Repositories;
 
-public class SQLiteRepository : IRepository, IDisposable
+public class SQLiteRepository : IRepository
 {
-    private readonly SqliteConnection connection;
-    private readonly SqliteCommand command;
+    private readonly string connectionString;
 
     ///<summary>
     ///<para>If you need to open/create a database, use the following argument: "Data Source=name.db";</para>
     ///<para>If you need a temporary in-memory database, don't use any arguments;</para>
     ///</summary>
-    public SQLiteRepository(string connectionString = "Data Source=:memory:")
+    public SQLiteRepository(string _connectionString = "Data Source=database.sql")
     {
-        connection = new SqliteConnection(connectionString);
-        connection.Open();
-        command = connection.CreateCommand();
+        connectionString = _connectionString;
         if (!TableExists("tasks"))
         {
             CreateTasksTable();
@@ -25,8 +22,7 @@ public class SQLiteRepository : IRepository, IDisposable
 
     private bool TableExists(string tableName)
     {
-        command.CommandText = $"SELECT name FROM sqlite_master WHERE type = 'table' AND name = '{tableName}';";
-        return command.ExecuteScalar() != null;
+        return ExecuteSQLiteQuery<object>($"SELECT name FROM sqlite_master WHERE type = 'table' AND name = '{tableName}';") != null;
     }
 
     private void CreateTasksTable()
@@ -96,14 +92,31 @@ public class SQLiteRepository : IRepository, IDisposable
 
     private void ExecuteSQLiteQuery(string commandString)
     {
-        command.CommandText = commandString;
-        command.ExecuteNonQuery();
+        using (var connection = new SqliteConnection(connectionString))
+        {
+            connection.Open();
+            var command = connection.CreateCommand();
+
+            command.CommandText = commandString;
+            command.ExecuteNonQuery();
+        }
+    }
+
+    private dynamic ExecuteSQLiteQuery<T>(string commandString)
+    {
+        using (var connection = new SqliteConnection(connectionString))
+        {
+            connection.Open();
+            var command = connection.CreateCommand();
+
+            command.CommandText = commandString;
+            return (T)command.ExecuteScalar();
+        }
     }
 
     private long GetIdOfLastAddedTask()
     {
-        command.CommandText = "SELECT last_insert_rowid()";
-        var id = command.ExecuteScalar();
+        var id = ExecuteSQLiteQuery<long>("SELECT last_insert_rowid()");
         if (id is null)
         {
             return -1;
@@ -114,29 +127,28 @@ public class SQLiteRepository : IRepository, IDisposable
 
     private IEnumerable<Task> GetTasksFromReader(string where = "")
     {
-        List<Task> tasks = new();
-        command.CommandText = $"SELECT * FROM tasks {where};";
-        using var reader = command.ExecuteReader();
-
-        while (reader.Read())
+        using (var connection = new SqliteConnection(connectionString))
         {
-            tasks.Add(new Task(
-                reader.GetInt64(0),
-                reader.GetString(1),
-                reader.GetString(2),
-                reader.GetDateTimeOffset(3),
-                reader.GetDateTimeOffset(4),
-                reader.GetBoolean(5))
-                );
+            connection.Open();
+            var command = connection.CreateCommand();
+            List<Task> tasks = new();
+            command.CommandText = $"SELECT * FROM tasks {where};";
+            using var reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                tasks.Add(new Task(
+                    reader.GetInt64(0),
+                    reader.GetString(1),
+                    reader.GetString(2),
+                    reader.GetDateTimeOffset(3),
+                    reader.GetDateTimeOffset(4),
+                    reader.GetBoolean(5))
+                    );
+            }
+
+            return tasks;
         }
-
-        return tasks;
     }
 
-    public void Dispose()
-    {
-        command?.Dispose();
-        connection?.Dispose();
-        GC.SuppressFinalize(this);
-    }
 }

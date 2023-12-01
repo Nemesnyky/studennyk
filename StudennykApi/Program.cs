@@ -5,10 +5,8 @@ using StudennykApi.Repositories;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Logging.AddSimpleConsole();
 builder.Services.AddHttpLogging(logging =>
 {
-    // Customize HTTP logging here.
     logging.LoggingFields = Microsoft.AspNetCore.HttpLogging.HttpLoggingFields.All;
     logging.RequestHeaders.Add("My-Request-Header");
     logging.ResponseHeaders.Add("My-Response-Header");

@@ -7,7 +7,10 @@ namespace App.Temporary
         private static readonly Random random = new();
         public static RestService InitializeInMemoryDataBase(RestService client)
         {
-            Task.Run(async () => { await client.AddTask(Temporary.Generators.GenerateRandomTask()); await Task.Delay(100); });
+            for (int i = 0; i < 3; i++)
+            {
+                Task.Run(async () => { await client.AddTask(Temporary.Generators.GenerateRandomTask()); });
+            }
 
             return client;
         }
