@@ -17,6 +17,7 @@
     <Color x:Key="AccentDark">#3A96F2</Color>
     <Color x:Key="Black">Black</Color>
     <Color x:Key="Gray30">#f7f7f7</Color>
+    <Color x:Key="Gray20">#00000008</Color>
     <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource Primary}"/>
     <SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource Secondary}"/>
     <SolidColorBrush x:Key="WhiteBrush" Color="{StaticResource White}"/>

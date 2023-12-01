@@ -99,5 +99,10 @@ namespace App.ViewModels
         {
             WeakReferenceMessenger.Default.Send(new ShowDescriptionMessage(task));
         }
+        [RelayCommand]
+        public void ShowNewTask()
+        {
+            WeakReferenceMessenger.Default.Send(new ShowNewTaskMessage());
+        }
     }
 }

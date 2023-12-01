@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App.Views.NewTask">
+    <FlexLayout
+       Padding="50"
+       Margin="20">
+        <Frame
+        Padding="40"
+        CornerRadius="15"
+        VerticalOptions="Fill" HorizontalOptions="Fill"
+        BackgroundColor="{StaticResource Gray30}">
+            <StackLayout
+           Spacing="15"
+            Padding="10">
+
+                <Label
+                Text = "New Task"
+                TextColor="{StaticResource Accent}"
+                FontFamily="Libre Franklin"
+                FontAttributes="Bold"
+                FontSize ="28"
+                HorizontalOptions="Center"/>
+                <Line 
+                   Stroke= "{StaticResource BlueLight}"
+                   X2="200" 
+                   HorizontalOptions="Center"
+                   Margin="5,0,5,0"/>
+
+
+                <Label
+                Text="Title"
+                TextColor = "{StaticResource Black}"
+                FontFamily="Libre Franklin"
+                FontSize = "20"
+                HeightRequest="22"
+                HorizontalOptions="Start"/>
+                <Frame
+                    Background="{StaticResource TextDark}"
+                    CornerRadius="25">
+                    <Entry
+                    TextColor="Black" 
+                    WidthRequest="240"
+                    HeightRequest="38"
+                    HorizontalOptions="Center"/>
+                </Frame>
+
+                <Label
+                    Text ="Time"
+                    TextColor = "{StaticResource Black}"
+                    FontFamily="Libre Franklin"
+                    FontSize = "20"
+                    HeightRequest="22"
+                    HorizontalOptions="Start"/>
+                <Grid ColumnSpacing="20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Frame Background="{StaticResource TextDark}"
+                           CornerRadius="15">
+                        <TimePicker
+                            WidthRequest="78"
+                            HeightRequest="38"
+                            HorizontalOptions="Center"/>
+                       
+                    </Frame>
+                    <Frame Grid.Row="1"
+                           Background="{StaticResource TextDark}"
+                           CornerRadius="15">
+                        <TimePicker
+                           WidthRequest="78"
+                           HeightRequest="38"
+                           HorizontalOptions="Center"/>
+                        
+                    </Frame>
+                </Grid>
+                <Label
+                   Text ="Description"
+                   TextColor = "{StaticResource Black}"
+                   FontFamily="Libre Franklin"
+                   FontSize = "20"
+                   HeightRequest="22"
+                   HorizontalOptions="Start"/>
+                <Frame
+                    Background="{StaticResource TextDark}"
+                    CornerRadius="15">
+                    <Entry
+                         WidthRequest="240"
+                         HeightRequest="38"
+                         HorizontalOptions="Center"/>
+                </Frame>
+
+
+                <Frame
+                VerticalOptions="EndAndExpand"
+                BackgroundColor="Transparent"
+                >
+
+                    <Polyline Points="0 13, 13 0, 30 30"
+                           Stroke="{StaticResource Orange}"
+                           StrokeThickness="7"
+                          StrokeLineJoin="Round" 
+                          StrokeLineCap="Round"
+                          HorizontalOptions="Center"
+                          VerticalOptions="Center"/>
+                    
+
+                </Frame>
+
+
+
+            </StackLayout>
+
+        </Frame>
+    </FlexLayout>
+</ContentView>
