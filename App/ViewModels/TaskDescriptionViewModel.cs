@@ -6,11 +6,11 @@ using Task = App.Models.Task;
 
 namespace App.ViewModels;
 
-public sealed class ShowDescriptionMessage: ValueChangedMessage<Models.Task>
+public sealed class ShowDescriptionMessage : ValueChangedMessage<Models.Task>
 {
-    public ShowDescriptionMessage(Models.Task task) : base (task)
+    public ShowDescriptionMessage(Models.Task task) : base(task)
     {
-        
+
     }
 }
 public sealed class HideDescriptionMessage { }
@@ -19,10 +19,10 @@ public partial class TaskDescriprionViewModel : ObservableObject
 {
     [ObservableProperty]
     public Models.Task task;
-    
-    public TaskDescriprionViewModel(Models.Task task )
+
+    public TaskDescriprionViewModel(Models.Task task)
     {
-        WeakReferenceMessenger.Default.Register<ShowDescriptionMessage>(this, (r, m) => { Task = m.Value;  });
+        WeakReferenceMessenger.Default.Register<ShowDescriptionMessage>(this, (r, m) => { Task = m.Value; });
         Task = task;
     }
     [RelayCommand]

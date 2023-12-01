@@ -23,8 +23,8 @@ namespace App.Views
             {
                 if (showDescription) { return; }
                 grid.AddColumnDefinition(new ColumnDefinition() { Width = new GridLength(0.25, GridUnitType.Star) });
-                grid.Add(new TaskDescription(m.Value) , grid.ColumnDefinitions.Count - 1 , 0);
-                showDescription = true; 
+                grid.Add(new TaskDescription(m.Value), grid.ColumnDefinitions.Count - 1, 0);
+                showDescription = true;
             });
             WeakReferenceMessenger.Default.Register<HideDescriptionMessage>(this, (r, m) =>
             {
