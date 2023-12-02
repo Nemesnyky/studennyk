@@ -42,6 +42,10 @@
                 <Label
             Text ="{Binding Task.Description}">
                 </Label>
+                <Frame
+                    BackgroundColor="Red">
+                    
+                </Frame>
          </StackLayout>
             </Frame>
     </FlexLayout>  
