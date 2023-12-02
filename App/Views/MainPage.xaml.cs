@@ -9,6 +9,7 @@ namespace App.Views
     public partial class MainPage : ContentPage
     {
         private bool showDescription = false;
+        private bool showNewTask = false;
         public MainPage()
         {
             InitializeComponent();
@@ -22,14 +23,21 @@ namespace App.Views
             {
                 if (showDescription) { return; }
                 grid.AddColumnDefinition(new ColumnDefinition() { Width = new GridLength(0.25, GridUnitType.Star) });
-                grid.Add(new TaskDescription(m.Value) , grid.ColumnDefinitions.Count - 1 , 0);
-                showDescription = true; 
+                grid.Add(new TaskDescription(m.Value), grid.ColumnDefinitions.Count - 1, 0);
+                showDescription = true;
             });
             WeakReferenceMessenger.Default.Register<HideDescriptionMessage>(this, (r, m) =>
             {
                 grid.RemoveAt(2);
                 grid.ColumnDefinitions.RemoveAt(2);
                 showDescription = false;
+            });
+            WeakReferenceMessenger.Default.Register<ShowNewTaskMessage>(this, (r, m) =>
+            {
+                if (showNewTask) { return; }
+                grid.AddColumnDefinition(new ColumnDefinition() { Width = new GridLength(0.25, GridUnitType.Star) });
+                grid.Add(new NewTask(), grid.ColumnDefinitions.Count - 1, 0);
+                showNewTask = true;
             });
         }
     }

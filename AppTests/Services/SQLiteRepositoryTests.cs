@@ -1,4 +1,5 @@
 ﻿using App.Repositories;
+using App.Temporary;
 using Task = App.Models.Task;
 
 namespace AppTests.Services
@@ -11,23 +12,8 @@ namespace AppTests.Services
         public SQLiteRepositoryTests()
         {
             repository = new SQLiteRepository("Data Source=:memory:");
-            task = GenerateRandomTask();
+            task = Generators.GenerateRandomTask();
             task.Id = repository.AddTask(task);
-        }
-
-        public static Task GenerateRandomTask()
-        {
-            Random random = new Random();
-            string[] titles = { "Buy groceries", "Finish project", "Call mom", "Exercise", "Read a book", "Clean the house" };
-            string lorem = "qwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnmqazwsxedcrfvtgbyhnujmikolp";
-            return new Task(
-                0,
-                titles[random.Next(titles.Length)],
-                lorem.Substring(random.Next(0, lorem.Length / 2), random.Next(1, lorem.Length / 2)),
-                DateTimeOffset.Now.AddDays(random.Next(1000)),
-                DateTimeOffset.Now.AddDays(random.Next(1000)),
-                random.Next(2) == 1
-                );
         }
 
         public void Dispose()
@@ -91,9 +77,24 @@ namespace AppTests.Services
         }
 
         [Fact]
+        public void ShouldDoneTask()
+        {
+            bool expected = Task.DONE;
+
+            repository.UpdateTaskStatus(task.Id, Task.DONE);
+            bool actual = repository.GetTask(task.Id).IsDone;
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
         public void ShouldGetTasks()
         {
-            var expected = new List<Task> { task, GenerateRandomTask(), GenerateRandomTask() };
+            var expected = new List<Task> {
+                task,
+                Generators.GenerateRandomTask(),
+                Generators.GenerateRandomTask()
+            };
 
             expected[1].Id = repository.AddTask(expected[1]);
             expected[2].Id = repository.AddTask(expected[2]);
