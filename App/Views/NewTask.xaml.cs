@@ -22,12 +22,12 @@ public partial class NewTask : ContentView
         repository = AppServiceProvider.GetService<IRepository>();
 
     }
-   
+
 
 
     private void CreateNewTask(object sender, TappedEventArgs e)
     {
-       var offset =  DateTimeOffset.Now.Offset;
+        var offset = DateTimeOffset.Now.Offset;
         var date = new DateTimeOffset(Date.Date + Time.Time, offset);
         var task = new Models.Task(Models.Task.DEFAULT_ID, Title.Text, Description.Text, DateTimeOffset.Now, date, Models.Task.NOT_DONE);
         repository.AddTask(task);

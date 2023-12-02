@@ -31,4 +31,3 @@ public partial class TaskDescriprionViewModel : ObservableObject
         WeakReferenceMessenger.Default.Send(new HideSideBarMessage());
     }
 }
-

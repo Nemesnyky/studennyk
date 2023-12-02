@@ -60,7 +60,7 @@
         </Grid>
         <Grid Grid.Row="2" Padding="20, 10, 20, 0" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand">
             <Frame BackgroundColor="#8FCB2E" CornerRadius="15" Padding="0" VerticalOptions="Fill" HorizontalOptions="FillAndExpand">
-               
+
                 <Frame.GestureRecognizers>
                     <DropGestureRecognizer DropCommand="{Binding TaskDroppedCommand}" />
                 </Frame.GestureRecognizers>

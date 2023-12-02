@@ -10,7 +10,7 @@ namespace App.Views
     public partial class MainPage : ContentPage
     {
         private bool showSideBar = false;
-        
+
         public MainPage()
         {
             InitializeComponent();
@@ -40,7 +40,7 @@ namespace App.Views
                 grid.Add(new NewTask(), grid.ColumnDefinitions.Count - 1, 0);
                 showSideBar = true;
             });
-            
+
         }
     }
 }

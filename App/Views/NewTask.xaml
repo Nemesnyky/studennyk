@@ -21,9 +21,9 @@
                 FontAttributes="Bold"
                 FontSize ="28"
                 HorizontalOptions="Center"/>
-                <Line 
+                <Line
                    Stroke= "{StaticResource BlueLight}"
-                   X2="200" 
+                   X2="200"
                    HorizontalOptions="Center"
                    Margin="5,0,5,0"/>
 
@@ -41,7 +41,7 @@
                     HorizontalOptions="FillAndExpand"
                    HeightRequest="70">
                     <Entry x:Name="Title"
-                    TextColor="Black" 
+                    TextColor="Black"
                     HorizontalOptions="FillAndExpand"
                         VerticalOptions="Center"
                         ClearButtonVisibility="WhileEditing"
@@ -66,9 +66,9 @@
                            HeightRequest="70">
                         <DatePicker
                             x:Name="Date"
-                            
+
                             TextColor = "{StaticResource Black}"/>
-                       
+
                     </Frame>
                     <Frame Grid.Column="1"
                            Background="{StaticResource TextDark}"
@@ -77,11 +77,11 @@
                            HeightRequest="70">
                         <TimePicker
                             x:Name="Time"
-                             
+
                             HorizontalOptions="FillAndExpand"
                             VerticalOptions="FillAndExpand"
                             TextColor = "{StaticResource Black}"/>
-                        
+
                     </Frame>
                 </Grid>
                 <Label
@@ -116,11 +116,11 @@
                         <Polyline Points="30 15, 12 40, 0 30"
                            Stroke="{StaticResource Orange}"
                            StrokeThickness="7"
-                          StrokeLineJoin="Round" 
+                          StrokeLineJoin="Round"
                           StrokeLineCap="Round"
                           HorizontalOptions="Center"
                           VerticalOptions="Center"/>
-                    
+
 
                 </Frame>
 
