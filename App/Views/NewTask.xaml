@@ -40,10 +40,12 @@
                     CornerRadius="25"
                     HorizontalOptions="FillAndExpand"
                    HeightRequest="70">
-                    <Entry
+                    <Entry x:Name="entryTitle"
                     TextColor="Black" 
                     HorizontalOptions="FillAndExpand"
-                        VerticalOptions="Center"/>
+                        VerticalOptions="Center"
+                        ClearButtonVisibility="WhileEditing"
+                        TextChanged="TitleTextChanged"/>
                 </Frame>
 
                 <Label
@@ -62,9 +64,10 @@
                            CornerRadius="25"
                            HorizontalOptions="FillAndExpand"
                            HeightRequest="70">
-                        <TimePicker
-                            HorizontalOptions="FillAndExpand"
-                            VerticalOptions="FillAndExpand"/>
+                        <DatePicker
+                            x:Name="newTaskDatePicker"
+                            DateSelected="NewTaskDatePicker"
+                            TextColor = "{StaticResource Black}"/>
                        
                     </Frame>
                     <Frame Grid.Column="1"
@@ -73,8 +76,11 @@
                             HorizontalOptions="FillAndExpand"
                            HeightRequest="70">
                         <TimePicker
+                            x:Name="newTaskTimePicker"
+                             PropertyChanged="NewTaskTimePicker" 
                             HorizontalOptions="FillAndExpand"
-                            VerticalOptions="FillAndExpand"/>
+                            VerticalOptions="FillAndExpand"
+                            TextColor = "{StaticResource Black}"/>
                         
                     </Frame>
                 </Grid>
@@ -91,8 +97,12 @@
                      HorizontalOptions="FillAndExpand"
                      HeightRequest="70">
                     <Entry
+                          x:Name="entryDescription"
+                         TextColor="Black"
                          VerticalOptions="FillAndExpand"
-                         HorizontalOptions="FillAndExpand"/>
+                         HorizontalOptions="FillAndExpand"
+                        ClearButtonVisibility="WhileEditing" 
+                       TextChanged="DescriptionTextChanged"/>
                 </Frame>
 
 
@@ -100,8 +110,12 @@
                 VerticalOptions="EndAndExpand"
                 BackgroundColor="Transparent"
                 >
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer  Command="{Binding Source={x:RelativeSource AncestorType={x:Type viewModels:NewTaskViewModel}}, Path=RewriteNewTask}" Buttons="Primary"
+                            CommandParameter="{Binding .}" />
+                        </Frame.GestureRecognizers>
 
-                    <Polyline Points="30 15, 12 40, 0 30"
+                        <Polyline Points="30 15, 12 40, 0 30"
                            Stroke="{StaticResource Orange}"
                            StrokeThickness="7"
                           StrokeLineJoin="Round" 
