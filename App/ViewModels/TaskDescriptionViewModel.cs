@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using App.Views;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using CommunityToolkit.Mvvm.Messaging.Messages;
@@ -13,7 +14,6 @@ public sealed class ShowDescriptionMessage : ValueChangedMessage<Models.Task>
 
     }
 }
-public sealed class HideDescriptionMessage { }
 
 public partial class TaskDescriprionViewModel : ObservableObject
 {
@@ -28,7 +28,7 @@ public partial class TaskDescriprionViewModel : ObservableObject
     [RelayCommand]
     private void HideDescription()
     {
-        WeakReferenceMessenger.Default.Send(new HideDescriptionMessage());
+        WeakReferenceMessenger.Default.Send(new HideSideBarMessage());
     }
 }
 

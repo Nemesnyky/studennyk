@@ -4,42 +4,33 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using App.Repositories;
+using App.Services;
 using App.ViewModels;
+using CommunityToolkit.Mvvm.Messaging;
 
 namespace App.Views;
+public sealed class HideNewTaskMessage { }
 
 public partial class NewTask : ContentView
 {
-    public DateTime newTaskDate;
-    public TimeSpan newTaskTime;
+    private readonly IRepository repository;
     public NewTask()
     {
         InitializeComponent();
         BindingContext = new NewTaskViewModel();
+        repository = AppServiceProvider.GetService<IRepository>();
 
     }
-    void DescriptionTextChanged(object sender, TextChangedEventArgs e)
-    {
-        string oldTextDescription = e.OldTextValue;
-        string newTextDescription = e.NewTextValue;
-        string textDescription = entryDescription.Text;
-    }
-    void TitleTextChanged(object sender, TextChangedEventArgs e)
-    {
-        string oldTextTitle = e.OldTextValue;
-        string newTextTitle = e.NewTextValue;
-        string textTitle = entryTitle.Text;
-    }
-    private void NewTaskDatePicker(object sender, DateChangedEventArgs e)
-    {
-        newTaskDate = newTaskDatePicker.Date;
-    }
-    void NewTaskTimePicker(object sender, PropertyChangedEventArgs args)
-    {
-        newTaskTime = newTaskTimePicker.Time;
-    }
-    void RewriteNewTask()
-    {
+   
 
+
+    private void CreateNewTask(object sender, TappedEventArgs e)
+    {
+       var offset =  DateTimeOffset.Now.Offset;
+        var date = new DateTimeOffset(Date.Date + Time.Time, offset);
+        var task = new Models.Task(Models.Task.DEFAULT_ID, Title.Text, Description.Text, DateTimeOffset.Now, date, Models.Task.NOT_DONE);
+        repository.AddTask(task);
+        WeakReferenceMessenger.Default.Send(new HideSideBarMessage());
     }
 }

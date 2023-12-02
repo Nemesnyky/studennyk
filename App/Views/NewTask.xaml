@@ -40,12 +40,12 @@
                     CornerRadius="25"
                     HorizontalOptions="FillAndExpand"
                    HeightRequest="70">
-                    <Entry x:Name="entryTitle"
+                    <Entry x:Name="Title"
                     TextColor="Black" 
                     HorizontalOptions="FillAndExpand"
                         VerticalOptions="Center"
                         ClearButtonVisibility="WhileEditing"
-                        TextChanged="TitleTextChanged"/>
+                        />
                 </Frame>
 
                 <Label
@@ -65,8 +65,8 @@
                            HorizontalOptions="FillAndExpand"
                            HeightRequest="70">
                         <DatePicker
-                            x:Name="newTaskDatePicker"
-                            DateSelected="NewTaskDatePicker"
+                            x:Name="Date"
+                            
                             TextColor = "{StaticResource Black}"/>
                        
                     </Frame>
@@ -76,8 +76,8 @@
                             HorizontalOptions="FillAndExpand"
                            HeightRequest="70">
                         <TimePicker
-                            x:Name="newTaskTimePicker"
-                             PropertyChanged="NewTaskTimePicker" 
+                            x:Name="Time"
+                             
                             HorizontalOptions="FillAndExpand"
                             VerticalOptions="FillAndExpand"
                             TextColor = "{StaticResource Black}"/>
@@ -97,12 +97,11 @@
                      HorizontalOptions="FillAndExpand"
                      HeightRequest="70">
                     <Entry
-                          x:Name="entryDescription"
+                          x:Name="Description"
                          TextColor="Black"
                          VerticalOptions="FillAndExpand"
                          HorizontalOptions="FillAndExpand"
-                        ClearButtonVisibility="WhileEditing" 
-                       TextChanged="DescriptionTextChanged"/>
+                        ClearButtonVisibility="WhileEditing" />
                 </Frame>
 
 
@@ -111,8 +110,7 @@
                 BackgroundColor="Transparent"
                 >
                     <Frame.GestureRecognizers>
-                        <TapGestureRecognizer  Command="{Binding Source={x:RelativeSource AncestorType={x:Type viewModels:NewTaskViewModel}}, Path=RewriteNewTask}" Buttons="Primary"
-                            CommandParameter="{Binding .}" />
+                        <TapGestureRecognizer  Tapped="CreateNewTask"  />
                         </Frame.GestureRecognizers>
 
                         <Polyline Points="30 15, 12 40, 0 30"
