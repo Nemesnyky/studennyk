@@ -10,11 +10,13 @@
           Padding="50"
           Margin="20">
         <Frame
+            Padding="40"
             CornerRadius="15"
             VerticalOptions="Fill" HorizontalOptions="Fill"
             BackgroundColor="{StaticResource Gray30}">
             <StackLayout
-               Spacing="25">
+               Spacing="25"
+                Padding="10">
 
                 <Label
                     Text = "{Binding Task.Title}"
@@ -40,13 +42,31 @@
                     HorizontalOptions="Center"
                     Margin="5,0,5,0"/>
                 <Label
-            Text ="{Binding Task.Description}">
+                 Text ="{Binding Task.Description}">
                 </Label>
                 <Frame
-                    BackgroundColor="Red">
+                    VerticalOptions="EndAndExpand"
+                    BackgroundColor="Transparent"
+                    >
                     
+                    <Polyline Points="0 0, 30 30, 15 15, 0 30, 30 0"
+                               Stroke="{StaticResource Orange}"
+                               StrokeThickness="7"
+                              StrokeLineJoin="Round" 
+                              StrokeLineCap="Round"
+                              HorizontalOptions="Center"
+                              VerticalOptions="Center"/>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer  Command="{Binding Source={x:RelativeSource AncestorType={x:Type viewModels:TaskDescriprionViewModel}}, Path=HideDescriptionCommand}"/>
+                    </Frame.GestureRecognizers>
+
+
                 </Frame>
-         </StackLayout>
-            </Frame>
+
+
+
+            </StackLayout>
+            
+        </Frame>
     </FlexLayout>  
 </ContentView>

@@ -99,6 +99,5 @@ namespace App.ViewModels
         {
             WeakReferenceMessenger.Default.Send(new ShowDescriptionMessage(task));
         }
-
     }
 }

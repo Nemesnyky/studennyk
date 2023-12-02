@@ -25,6 +25,12 @@ namespace App.Views
                 grid.Add(new TaskDescription(m.Value) , grid.ColumnDefinitions.Count - 1 , 0);
                 showDescription = true; 
             });
+            WeakReferenceMessenger.Default.Register<HideDescriptionMessage>(this, (r, m) =>
+            {
+                grid.RemoveAt(2);
+                grid.ColumnDefinitions.RemoveAt(2);
+                showDescription = false;
+            });
         }
     }
 }
