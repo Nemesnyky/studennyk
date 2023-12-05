@@ -66,8 +66,8 @@
                             x:Name="Date"
                             HeightRequest="40"
                             FontSize="9"
-                            Grid.Column="0" 
-                            Background="{StaticResource TextDark}"       
+                            Grid.Column="0"
+                            Background="{StaticResource TextDark}"
                             TextColor = "{StaticResource Black}"/>
                     </Border>
                     <Border Grid.Column="1"
