@@ -6,20 +6,19 @@
        Padding="50"
        Margin="20">
         <Frame
-        Padding="40"
+        Padding="23,35,23,0"
         CornerRadius="15"
         VerticalOptions="Fill" HorizontalOptions="Fill"
         BackgroundColor="{StaticResource Gray30}">
             <StackLayout
-           Spacing="15"
-            Padding="10">
+           Spacing="15">
 
                 <Label
                 Text = "New Task"
                 TextColor="{StaticResource Accent}"
                 FontFamily="Libre Franklin"
                 FontAttributes="Bold"
-                FontSize ="28"
+                FontSize ="25"
                 HorizontalOptions="Center"/>
                 <Line
                    Stroke= "{StaticResource BlueLight}"
@@ -35,18 +34,17 @@
                 FontSize = "20"
                 HeightRequest="22"
                 HorizontalOptions="Start"/>
-                <Frame
-                    Background="{StaticResource TextDark}"
-                    CornerRadius="25"
-                    HorizontalOptions="FillAndExpand"
-                   HeightRequest="70">
-                    <Entry x:Name="Title"
-                    TextColor="Black"
-                    HorizontalOptions="FillAndExpand"
-                        VerticalOptions="Center"
-                        ClearButtonVisibility="WhileEditing"
-                        />
-                </Frame>
+                <Border>
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="15"/>
+                    </Border.StrokeShape>
+                    <Entry  x:Name="Title"
+                        TextColor="Black"
+                        Background="{StaticResource TextDark}"
+                        HeightRequest="40"
+                        ClearButtonVisibility="WhileEditing">
+                    </Entry>
+                </Border>
 
                 <Label
                     Text ="Time"
@@ -60,29 +58,29 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <Frame Grid.Column="0" Background="{StaticResource TextDark}"
-                           CornerRadius="25"
-                           HorizontalOptions="FillAndExpand"
-                           HeightRequest="70">
-                        <DatePicker
+                    <Border>
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="15"/>
+                    </Border.StrokeShape>
+                    <DatePicker
                             x:Name="Date"
-
+                            HeightRequest="40"
+                            FontSize="9"
+                            Grid.Column="0" 
+                            Background="{StaticResource TextDark}"       
                             TextColor = "{StaticResource Black}"/>
-
-                    </Frame>
-                    <Frame Grid.Column="1"
-                           Background="{StaticResource TextDark}"
-                            CornerRadius="25"
-                            HorizontalOptions="FillAndExpand"
-                           HeightRequest="70">
+                    </Border>
+                    <Border Grid.Column="1"
+                        Background="{StaticResource TextDark}"
+                        HeightRequest="40">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="15"/>
+                        </Border.StrokeShape>
                         <TimePicker
                             x:Name="Time"
-
-                            HorizontalOptions="FillAndExpand"
-                            VerticalOptions="FillAndExpand"
+                            FontSize="11"
                             TextColor = "{StaticResource Black}"/>
-
-                    </Frame>
+                    </Border>
                 </Grid>
                 <Label
                    Text ="Description"
@@ -91,18 +89,19 @@
                    FontSize = "20"
                    HeightRequest="22"
                    HorizontalOptions="Start"/>
-                <Frame
-                    Background="{StaticResource TextDark}"
-                     CornerRadius="25"
-                     HorizontalOptions="FillAndExpand"
-                     HeightRequest="70">
-                    <Entry
-                          x:Name="Description"
-                         TextColor="Black"
-                         VerticalOptions="FillAndExpand"
-                         HorizontalOptions="FillAndExpand"
-                        ClearButtonVisibility="WhileEditing" />
-                </Frame>
+
+                <Border>
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="15"/>
+                    </Border.StrokeShape>
+                    <Entry  x:Name="Description"
+                        TextColor="Black"
+                        Background="{StaticResource TextDark}"
+                        HeightRequest="80"
+                        ClearButtonVisibility="WhileEditing">
+                    </Entry>
+                </Border>
+
 
 
                 <Frame
