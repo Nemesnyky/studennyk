@@ -8,7 +8,7 @@
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              x:DataType="viewModels:AgendaViewModel"
              x:Class="App.Views.Agenda">
-    <Grid Padding="20" VerticalOptions="Fill" HorizontalOptions="Fill">
+    <Grid Padding="10" VerticalOptions="Fill" HorizontalOptions="Fill">
         <Grid.RowDefinitions>
             <RowDefinition Height="0.08*" />
             <RowDefinition Height="0.7*" />

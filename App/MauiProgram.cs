@@ -1,5 +1,7 @@
 ﻿using App.Repositories;
+using App.ViewModels;
 using Microsoft.Extensions.Logging;
+
 
 namespace App
 {
@@ -17,7 +19,7 @@ namespace App
                     fonts.AddFont("LibreFranklin-SemiBold.ttf", "LibreFranklinSemiBold");
                 });
             builder.Services.AddSingleton<IRepository>(Temporary.Initializators.InitializeInMemoryDataBase(new SQLiteRepository()));
-
+            builder.Services.AddSingleton<AgendaViewModel>();
             return builder.Build();
         }
     }

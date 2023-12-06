@@ -3,18 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using App.Services;
 using App.ViewModels;
 using CommunityToolkit.Mvvm.Messaging;
 
 
-namespace App.Views;
-
-public partial class Agenda : ContentView
+namespace App.Views 
 {
-    public Agenda()
+    public partial class Agenda : ContentView
     {
-        InitializeComponent();
-        BindingContext = new AgendaViewModel();
+        public Agenda()
+        {
+            InitializeComponent();
+            BindingContext =  AppServiceProvider.GetService<AgendaViewModel>(); 
+        }
+
     }
 
 }
+
