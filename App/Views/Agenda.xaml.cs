@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using App.Services;
 using App.ViewModels;
 using CommunityToolkit.Mvvm.Messaging;
 
@@ -14,7 +15,7 @@ public partial class Agenda : ContentView
     public Agenda()
     {
         InitializeComponent();
-        BindingContext = new AgendaViewModel();
+        BindingContext = AppServiceProvider.GetService<AgendaViewModel>();
     }
 
 }
