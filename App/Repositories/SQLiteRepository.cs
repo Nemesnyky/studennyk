@@ -34,8 +34,8 @@ namespace App.Repositories
             ExecuteSQLiteQuery(
                 $"CREATE TABLE tasks (" +
                 "task_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
-                "title TEXT NOT NULL, " +
-                "description TEXT NOT NULL, " +
+                "title TEXT, " +
+                "description TEXT, " +
                 "created TEXT NOT NULL, " +
                 "due TEXT, " +
                 "is_done INT NOT NULL);");

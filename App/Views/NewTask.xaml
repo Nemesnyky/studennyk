@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App.Views.NewTask">
+    <FlexLayout
+       Padding="50"
+       Margin="10">
+        <Frame
+        Padding="23,35,23,0"
+        CornerRadius="15"
+        VerticalOptions="Fill" HorizontalOptions="Fill"
+        BackgroundColor="{StaticResource Gray30}">
+            <StackLayout
+           Spacing="15">
+
+                <Label
+                Text = "New Task"
+                TextColor="{StaticResource Accent}"
+                FontFamily="Libre Franklin"
+                FontAttributes="Bold"
+                FontSize ="25"
+                HorizontalOptions="Center"/>
+                <Line
+                    StrokeThickness="3"
+                   Stroke= "{StaticResource BlueLight}"
+                   X2="200"
+                   HorizontalOptions="Center"
+                   Margin="5,0,5,0"/>
+
+
+                <Label
+                Text="Title"
+                TextColor = "{StaticResource Black}"
+                FontFamily="Libre Franklin"
+                FontSize = "20"
+                HeightRequest="22"
+                HorizontalOptions="Start"/>
+                <Border>
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="15"/>
+                    </Border.StrokeShape>
+                    <Entry  x:Name="Title"
+                        TextColor="Black"
+                        Background="{StaticResource TextDark}"
+                        HeightRequest="40"
+                        ClearButtonVisibility="WhileEditing">
+                    </Entry>
+                </Border>
+
+                <Label
+                    Text ="Time"
+                    TextColor = "{StaticResource Black}"
+                    FontFamily="Libre Franklin"
+                    FontSize = "20"
+                    HeightRequest="22"
+                    HorizontalOptions="Start"/>
+
+                    <Border
+                        BackgroundColor="{StaticResource TextDark}">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="15"/>
+                    </Border.StrokeShape>
+                    <DatePicker
+                            x:Name="Date"
+                            VerticalOptions="CenterAndExpand"
+                            FontSize="12"
+                           HorizontalOptions="CenterAndExpand"
+                            Background="{StaticResource TextDark}"
+                            TextColor = "{StaticResource Black}"/>
+                    </Border>
+                    <Border
+                        Background="{StaticResource TextDark}"
+                        HeightRequest="40">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="15"/>
+                        </Border.StrokeShape>
+
+                            <TimePicker
+                            x:Name="Time"
+                            FontSize="10"
+                            CharacterSpacing="2"
+                            TextColor = "{StaticResource Black}"/>
+
+                    </Border>
+                <Label
+                   Text ="Description"
+                   TextColor = "{StaticResource Black}"
+                   FontFamily="Libre Franklin"
+                   FontSize = "20"
+                   HeightRequest="22"
+                   HorizontalOptions="Start"/>
+
+                <Border>
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="15"/>
+                    </Border.StrokeShape>
+                    <Editor  x:Name="Description"
+                        TextColor="Black"
+                        Background="{StaticResource TextDark}"
+                        HeightRequest="80"
+                        Keyboard="Chat">
+                    </Editor>
+                </Border>
+
+
+                <Frame
+                VerticalOptions="EndAndExpand"
+                BackgroundColor="Transparent"
+                >
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer  Tapped="CreateNewTask"  />
+                        </Frame.GestureRecognizers>
+
+                        <Polyline Points="30 15, 12 40, 0 30"
+                           Stroke="{StaticResource Orange}"
+                           StrokeThickness="7"
+                          StrokeLineJoin="Round"
+                          StrokeLineCap="Round"
+                          HorizontalOptions="Center"
+                          VerticalOptions="Center"/>
+
+
+                </Frame>
+
+
+
+            </StackLayout>
+
+        </Frame>
+    </FlexLayout>
+</ContentView>
