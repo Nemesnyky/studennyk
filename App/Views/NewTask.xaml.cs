@@ -31,11 +31,11 @@ public partial class NewTask : ContentView
     {
         var offset = DateTimeOffset.Now.Offset;
         var date = new DateTimeOffset(Date.Date + Time.Time, offset);
-        var task = new Models.Task(Models.Task.DEFAULT_ID, Title.Text??"", Description.Text??"", DateTimeOffset.Now, date, Models.Task.NOT_DONE);
+        var task = new Models.Task(Models.Task.DEFAULT_ID, Title.Text ?? "", Description.Text ?? "", DateTimeOffset.Now, date, Models.Task.NOT_DONE);
         repository.AddTask(task);
         WeakReferenceMessenger.Default.Send(new HideSideBarMessage());
-       var vm = AppServiceProvider.GetService<AgendaViewModel>();
-       vm.AddTask(task);    
+        var vm = AppServiceProvider.GetService<AgendaViewModel>();
+        vm.AddTask(task);
 
 
     }

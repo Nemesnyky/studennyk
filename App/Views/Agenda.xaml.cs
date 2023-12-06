@@ -8,17 +8,16 @@ using App.ViewModels;
 using CommunityToolkit.Mvvm.Messaging;
 
 
-namespace App.Views 
+namespace App.Views
 {
     public partial class Agenda : ContentView
     {
         public Agenda()
         {
             InitializeComponent();
-            BindingContext =  AppServiceProvider.GetService<AgendaViewModel>(); 
+            BindingContext =  AppServiceProvider.GetService<AgendaViewModel>();
         }
 
     }
 
 }
-

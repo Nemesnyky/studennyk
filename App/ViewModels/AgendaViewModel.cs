@@ -32,7 +32,7 @@ namespace App.ViewModels
             repository = AppServiceProvider.GetService<IRepository>();
             allTasks = repository.GetTasks().ToList();
             LoadTaskGroups(allTasks);
-            
+
         }
 
         public void AddTask(Task task)
@@ -41,7 +41,7 @@ namespace App.ViewModels
             LoadTaskGroups(allTasks);
         }
 
-        private void LoadTaskGroups(IEnumerable<Task> tasks) 
+        private void LoadTaskGroups(IEnumerable<Task> tasks)
         {
             List<DateTimeOffset> dates = new();
             List<Task> notDoneTasks = new();
@@ -66,8 +66,8 @@ namespace App.ViewModels
             }
             int a = 7;
             TaskGroups.Clear();
-            foreach (var taskGroup in taskGroups) 
-            { 
+            foreach (var taskGroup in taskGroups)
+            {
                 TaskGroups.Add(taskGroup);
             }
         }
@@ -77,7 +77,7 @@ namespace App.ViewModels
         {
             allTasks.Remove(allTasks.Single(t => t.Id == taskId));
             //TODO : delete task from TaskGroups
-             repository.DeleteTask(taskId);
+            repository.DeleteTask(taskId);
         }
 
         private async ThreadTask CompleteTask(long taskId)
@@ -98,7 +98,7 @@ namespace App.ViewModels
 
             await ThreadTask.Run(() => repository.UpdateTaskStatus(taskId, Task.DONE));
         }
-       
+
 
         [RelayCommand]
         private void DragStarted(Task task)
@@ -122,9 +122,9 @@ namespace App.ViewModels
         {
             WeakReferenceMessenger.Default.Send(new ShowNewTaskMessage());
         }
-        public void ReloadTasks() 
+        public void ReloadTasks()
         {
-           
+
         }
     }
 }

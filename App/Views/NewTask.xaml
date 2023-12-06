@@ -54,7 +54,7 @@
                     FontSize = "20"
                     HeightRequest="22"
                     HorizontalOptions="Start"/>
-                
+
                     <Border
                         BackgroundColor="{StaticResource TextDark}">
                     <Border.StrokeShape>
@@ -68,19 +68,19 @@
                             Background="{StaticResource TextDark}"
                             TextColor = "{StaticResource Black}"/>
                     </Border>
-                    <Border 
+                    <Border
                         Background="{StaticResource TextDark}"
                         HeightRequest="40">
                         <Border.StrokeShape>
                             <RoundRectangle CornerRadius="15"/>
                         </Border.StrokeShape>
-                       
+
                             <TimePicker
                             x:Name="Time"
                             FontSize="10"
                             CharacterSpacing="2"
                             TextColor = "{StaticResource Black}"/>
-                        
+
                     </Border>
                 <Label
                    Text ="Description"
