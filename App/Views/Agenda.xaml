@@ -8,7 +8,7 @@
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              x:DataType="viewModels:AgendaViewModel"
              x:Class="App.Views.Agenda">
-    <Grid Padding="20" VerticalOptions="Fill" HorizontalOptions="Fill">
+    <Grid Padding="0" VerticalOptions="Fill" HorizontalOptions="Fill" Margin="5">
         <Grid.RowDefinitions>
             <RowDefinition Height="0.08*" />
             <RowDefinition Height="0.7*" />
@@ -23,7 +23,7 @@
         </Grid>
 
         <Grid Grid.Row="1" Padding="0" BackgroundColor="Transparent">
-            <CollectionView ItemsSource="{Binding TaskGroups}" IsGrouped="True">
+            <CollectionView ItemsSource="{Binding TaskGroups}" IsGrouped="True" >
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
                 </CollectionView.ItemsLayout>
@@ -38,7 +38,7 @@
                 </CollectionView.GroupHeaderTemplate>
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:Task">
-                        <Frame HeightRequest="45"  Padding="5,0,0,0" BackgroundColor="{StaticResource Gray30}"
+                        <Frame HeightRequest="45" Margin="0,0,10,0" Padding="5,0,0,0" BackgroundColor="{StaticResource Gray30}"
                                BorderColor="Transparent">
                             <Label VerticalTextAlignment="Center" FontSize="16" Padding="10,0,0,0" TextColor="{StaticResource Text}"
                                    Text="{Binding Title}">

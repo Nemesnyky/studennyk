@@ -36,7 +36,7 @@ namespace App.Views
             WeakReferenceMessenger.Default.Register<ShowNewTaskMessage>(this, (r, m) =>
             {
                 if (showSideBar) { return; }
-                grid.AddColumnDefinition(new ColumnDefinition() { Width = new GridLength(0.25, GridUnitType.Star) });
+                grid.AddColumnDefinition(new ColumnDefinition() { Width = new GridLength(0.5, GridUnitType.Star) });
                 grid.Add(new NewTask(), grid.ColumnDefinitions.Count - 1, 0);
                 showSideBar = true;
             });

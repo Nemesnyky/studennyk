@@ -2,87 +2,92 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="App.Views.NewTask">
-    <FlexLayout
-       Padding="50"
-       Margin="20">
-        <Frame
+
+    <Frame
         Padding="23,35,23,0"
         CornerRadius="15"
-        VerticalOptions="Fill" HorizontalOptions="Fill"
+        Margin="20"
+        VerticalOptions="FillAndExpand" HorizontalOptions="Fill"
         BackgroundColor="{StaticResource Gray30}">
-            <StackLayout
+        <StackLayout
            Spacing="15">
 
-                <Label
+            <Label
                 Text = "New Task"
                 TextColor="{StaticResource Accent}"
                 FontFamily="Libre Franklin"
                 FontAttributes="Bold"
                 FontSize ="25"
                 HorizontalOptions="Center"/>
-                <Line
+            <Line
                    Stroke= "{StaticResource BlueLight}"
                    X2="200"
                    HorizontalOptions="Center"
                    Margin="5,0,5,0"/>
 
 
-                <Label
+            <Label
                 Text="Title"
                 TextColor = "{StaticResource Black}"
                 FontFamily="Libre Franklin"
                 FontSize = "20"
                 HeightRequest="22"
                 HorizontalOptions="Start"/>
-                <Border>
-                    <Border.StrokeShape>
-                        <RoundRectangle CornerRadius="15"/>
-                    </Border.StrokeShape>
-                    <Entry  x:Name="Title"
+            <Border>
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="15"/>
+                </Border.StrokeShape>
+                <Entry  x:Name="Title"
                         TextColor="Black"
                         Background="{StaticResource TextDark}"
                         HeightRequest="40"
                         ClearButtonVisibility="WhileEditing">
-                    </Entry>
-                </Border>
+                </Entry>
+            </Border>
 
-                <Label
+            <Label
                     Text ="Time"
                     TextColor = "{StaticResource Black}"
                     FontFamily="Libre Franklin"
                     FontSize = "20"
                     HeightRequest="22"
                     HorizontalOptions="Start"/>
-                <Grid ColumnSpacing="10">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Border>
+            <Grid ColumnSpacing="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.3*" />
+                    <ColumnDefinition Width="0.7*" />
+                </Grid.ColumnDefinitions>
+                <Border>
                     <Border.StrokeShape>
                         <RoundRectangle CornerRadius="15"/>
                     </Border.StrokeShape>
                     <DatePicker
                             x:Name="Date"
                             HeightRequest="40"
-                            FontSize="9"
+                        HorizontalOptions="StartAndExpand"
+                            FontSize="11"
                             Grid.Column="0" 
                             Background="{StaticResource TextDark}"       
                             TextColor = "{StaticResource Black}"/>
-                    </Border>
-                    <Border Grid.Column="1"
+                </Border>
+                <Border Grid.Column="1"
                         Background="{StaticResource TextDark}"
                         HeightRequest="40">
-                        <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="15"/>
-                        </Border.StrokeShape>
-                        <TimePicker
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="15"/>
+                    </Border.StrokeShape>
+                    <TimePicker
+                        Grid.Column="1"
+                        Background="{StaticResource TextDark}"
+                        HeightRequest="40"
                             x:Name="Time"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
                             FontSize="11"
                             TextColor = "{StaticResource Black}"/>
-                    </Border>
-                </Grid>
-                <Label
+                </Border>
+            </Grid>
+            <Label
                    Text ="Description"
                    TextColor = "{StaticResource Black}"
                    FontFamily="Libre Franklin"
@@ -90,29 +95,29 @@
                    HeightRequest="22"
                    HorizontalOptions="Start"/>
 
-                <Border>
-                    <Border.StrokeShape>
-                        <RoundRectangle CornerRadius="15"/>
-                    </Border.StrokeShape>
-                    <Entry  x:Name="Description"
+            <Border>
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="15"/>
+                </Border.StrokeShape>
+                <Entry  x:Name="Description"
                         TextColor="Black"
                         Background="{StaticResource TextDark}"
                         HeightRequest="80"
                         ClearButtonVisibility="WhileEditing">
-                    </Entry>
-                </Border>
+                </Entry>
+            </Border>
 
 
 
-                <Frame
+            <Frame
                 VerticalOptions="EndAndExpand"
                 BackgroundColor="Transparent"
                 >
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer  Tapped="CreateNewTask"  />
-                        </Frame.GestureRecognizers>
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer  Tapped="CreateNewTask"  />
+                </Frame.GestureRecognizers>
 
-                        <Polyline Points="30 15, 12 40, 0 30"
+                <Polyline Points="30 15, 12 40, 0 30"
                            Stroke="{StaticResource Orange}"
                            StrokeThickness="7"
                           StrokeLineJoin="Round"
@@ -121,12 +126,11 @@
                           VerticalOptions="Center"/>
 
 
-                </Frame>
+            </Frame>
 
 
 
-            </StackLayout>
+        </StackLayout>
 
-        </Frame>
-    </FlexLayout>
+    </Frame>
 </ContentView>

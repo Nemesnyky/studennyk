@@ -5,8 +5,8 @@
              x:Class="App.Views.MainPage">
     <Grid  x:Name="grid" >
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.2*" />
-            <ColumnDefinition Width="0.7*" />
+            <ColumnDefinition Width="295" />
+            <ColumnDefinition Width="0.6*" />
         </Grid.ColumnDefinitions>
         <views:Menu Grid.Column="0"/>
         <views:Agenda Grid.Column="1" x:Name="agenda"/>

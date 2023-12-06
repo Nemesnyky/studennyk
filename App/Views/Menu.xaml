@@ -5,44 +5,126 @@
              xmlns:viewModels="clr-namespace:App.ViewModels"
              xmlns:local="clr-namespace:App"
              x:Class="App.Views.Menu">
-    <FlexLayout
-   Padding="50"
-   Margin="20">
+    <StackLayout>
         <Frame
+        Margin="20"
     Padding="12,22,12,20"
     CornerRadius="15"
-    VerticalOptions="Fill" HorizontalOptions="Fill"
+    VerticalOptions="FillAndExpand" HorizontalOptions="Fill"
     BackgroundColor="{StaticResource Gray30}">
-            <StackLayout  Spacing="15">
+        <StackLayout  Spacing="15">
 
-                <Grid ColumnSpacing="0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Border Grid.Column="0"
-                            HeightRequest="75">
-                        <Image Source="frame_33.png"/>
-                    </Border>
-                    <Border Grid.Column="1"
-                            HeightRequest="75">
-                        <Image Source="frame_34.png"/>
-                    </Border>
-                </Grid>
+            <Grid ColumnSpacing="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Border Grid.Column="0"
+                            HeightRequest="75"
+                        WidthRequest="75">
+                    <Image Source="frame_33.png"/>
+                </Border>
+                <Border Grid.Column="1"
+                            HeightRequest="75"
+                       WidthRequest="75">
+                    <Image Source="frame_34.png"/>
+                </Border>
+            </Grid>
 
-                <Frame>
-                    
-                </Frame>
-                <Line
+            <Border 
+                Background="{StaticResource TextDark}"
+                HeightRequest="55">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="15"/>
+                </Border.StrokeShape>
+                
+                    <Image Source="search.png" HeightRequest="35.006" WidthRequest="35"/>
+       
+                </Border>
+            <Line
                     Stroke= "{StaticResource BlueLight}"
                     X2="200"
                     HorizontalOptions="Center"
                     Margin="5,0,5,0"/>
 
+            <Border 
+             Background="{StaticResource BlueLight}"
+             HeightRequest="55">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="15"/>
+                </Border.StrokeShape>
+                <Grid ColumnSpacing="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.3*" />
+                        <ColumnDefinition Width="0.7*" />
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="0" 
+                           Source="university.png"
+                           HorizontalOptions="Start"
+                           HeightRequest="23.333" 
+                           WidthRequest="25"
+                           Margin="20,0,0,0"/>
+                    <Label Grid.Column="1" 
+                       Text="University" 
+                       FontSize="20"
+                       FontFamily="LibreFranklinBold"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Center"/>
+                    </Grid>
+               </Border>
 
+            <Border  Background="{StaticResource Gray30}" HeightRequest="55">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="15"/>
+                </Border.StrokeShape>
+                <Grid ColumnSpacing="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.3*" />
+                        <ColumnDefinition Width="0.75*" />
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="0" 
+                           Source="heart.png"
+                           HorizontalOptions="Start"
+                           HeightRequest="23.333" 
+                           WidthRequest="25"
+                           Margin="20,0,0,0"/>
+                    <Label Grid.Column="1" 
+                           Text="Life" 
+                            Opacity="0.8"
+                           FontSize="20"
+                           FontFamily="LibreFranklinBold"
+                           HorizontalOptions="Start"
+                           VerticalOptions="Center"/>
+                </Grid>
+            </Border>
 
-            </StackLayout>
+            <Border Background="{StaticResource Gray30}" HeightRequest="55">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="15"/>
+                </Border.StrokeShape>
+                <Grid ColumnSpacing="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.3*" />
+                        <ColumnDefinition Width="0.75*" />
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="0" 
+                           Source="briefcase.png"
+                           HorizontalOptions="Start"
+                           HeightRequest="23.333" 
+                           WidthRequest="25"
+                           Margin="20,0,0,0"/>
+                    <Label Grid.Column="1" 
+                           Text="Work" 
+                           FontSize="20"
+                            Opacity="0.8"
+                           FontFamily="LibreFranklinBold"
+                           HorizontalOptions="Start"
+                           VerticalOptions="Center"/>
+                </Grid>
+            </Border>
 
-        </Frame>
-    </FlexLayout>
+        </StackLayout>
+
+    </Frame>
+    </StackLayout>
 </ContentView>
