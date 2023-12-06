@@ -25,20 +25,20 @@
         <Grid Grid.Row="1" Padding="0" BackgroundColor="Transparent">
             <CollectionView ItemsSource="{Binding TaskGroups}" IsGrouped="True">
                 <CollectionView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="20" />
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
                 </CollectionView.ItemsLayout>
                 <CollectionView.GroupHeaderTemplate>
                     <DataTemplate x:DataType="viewModels:TaskGroup">
-                        <Label FontFamily="LibreFranklinSemiBold" Padding="0, 25, 0, 0"
-                               TextColor="{StaticResource Accent}" Opacity="0.7" VerticalTextAlignment="Center"
-                               HorizontalTextAlignment="Start" FontSize="16" HeightRequest="49"
+                        <Label FontFamily="LibreFranklinSemiBold" Padding="0, 5, 0, 0"
+                               TextColor="{StaticResource Accent}" Opacity="0.8" VerticalTextAlignment="Center"
+                               HorizontalTextAlignment="Start" FontSize="20" HeightRequest="24"
                                Text="{Binding Date, StringFormat='{0:HH}:00'}">
                         </Label>
                     </DataTemplate>
                 </CollectionView.GroupHeaderTemplate>
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:Task">
-                        <Frame HeightRequest="50"  Padding="5,0,0,0" BackgroundColor="{StaticResource Gray30}"
+                        <Frame HeightRequest="45"  Padding="5,0,0,0" BackgroundColor="{StaticResource Gray30}"
                                BorderColor="Transparent">
                             <Label VerticalTextAlignment="Center" FontSize="16" Padding="10,0,0,0" TextColor="{StaticResource Text}"
                                    Text="{Binding Title}">
@@ -60,7 +60,7 @@
         </Grid>
         <Grid Grid.Row="2" Padding="20, 10, 20, 0" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand">
             <Frame BackgroundColor="#8FCB2E" CornerRadius="15" Padding="0" VerticalOptions="Fill" HorizontalOptions="FillAndExpand">
-               
+
                 <Frame.GestureRecognizers>
                     <DropGestureRecognizer DropCommand="{Binding TaskDroppedCommand}" />
                 </Frame.GestureRecognizers>

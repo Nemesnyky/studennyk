@@ -12,4 +12,3 @@ public partial class NewTaskViewModel : ObservableObject
     {
     }
 }
-

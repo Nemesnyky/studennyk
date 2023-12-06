@@ -10,7 +10,7 @@
         </Grid.ColumnDefinitions>
         <views:Menu Grid.Column="0"/>
         <views:Agenda Grid.Column="1" x:Name="agenda"/>
-     
+
     </Grid>
 
 
