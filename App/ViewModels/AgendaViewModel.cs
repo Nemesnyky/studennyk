@@ -29,15 +29,15 @@ namespace App.ViewModels
         {
             repository = AppServiceProvider.GetService<IRepository>();
 
-            ThreadTask.Run(LoadTasks);
+            LoadTasks();
         }
 
-        private async ThreadTask LoadTasks()
+        private void LoadTasks()
         {
 
             TaskGroups.Clear();
             allTasks.Clear();
-            allTasks.AddRange(await ThreadTask.Run(repository.GetTasks));
+            allTasks.AddRange(repository.GetTasks());
 
             List<DateTimeOffset> dates = new();
             List<Task> notDoneTasks = new();
@@ -60,6 +60,11 @@ namespace App.ViewModels
                     notDoneTasks.Where(t => t.Due.Hour == date.Hour))
                     );
             }
+        }
+        public void AddTask(Task task)
+        {
+            repository.AddTask(task);
+            LoadTasks();
         }
 
         public async ThreadTask DeleteTask(int taskId)
