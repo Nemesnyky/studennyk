@@ -32,6 +32,6 @@ public partial class NewTask : ContentView
         var task = new Models.Task(Models.Task.DEFAULT_ID, Title.Text, Description.Text, DateTimeOffset.Now, date, Models.Task.NOT_DONE);
         repository.AddTask(task);
         WeakReferenceMessenger.Default.Send(new HideSideBarMessage());
-        
+
     }
 }
